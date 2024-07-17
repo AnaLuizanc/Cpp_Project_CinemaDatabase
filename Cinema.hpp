@@ -1,7 +1,7 @@
 #include <string>
 #include <vector>
-using namespace std;
 #include "Movie.hpp"
+using namespace std;
 
 class Cinema{
     string cinemaID;
@@ -44,7 +44,7 @@ class Cinema{
             return yCoordinate;
         }
 
-        void setTicketPrice(int ticketPrice){
+        void setTicketPrice(double ticketPrice){
             this->ticketPrice = ticketPrice;
         }
 
@@ -52,7 +52,7 @@ class Cinema{
             return ticketPrice;
         }
 
-        void setMovies(string movies[], int amount){
+        /*void setMovies(string movies[], int amount){
             for (int i = 0; i < amount; i++){
                 this->movies.push_back(movies[i]);
             }
@@ -60,5 +60,5 @@ class Cinema{
 
         vector<Movie> getMovies(){
             return movies;
-        }
+        }*/
 };
