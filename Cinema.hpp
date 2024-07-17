@@ -1,5 +1,7 @@
 #include <string>
+#include <vector>
 using namespace std;
+#include "Movie.hpp"
 
 class Cinema{
     string cinemaID;
@@ -7,8 +9,10 @@ class Cinema{
     int xCoordinate;
     int yCoordinate;
     double ticketPrice;
-    Movie movies[];
+    vector<Movie> movies;
 
     
+        
 
-}
+
+};
