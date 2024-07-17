@@ -16,7 +16,7 @@ class Movie{
 
     public:
         void setTconst(string tconst){
-            tconst = tconst;
+            this->tconst = tconst;
         }
 
         string getTconst(){
@@ -24,7 +24,7 @@ class Movie{
         }
 
         void setTitleType(string titleType){
-            titleType = titleType;
+            this->titleType = titleType;
         }
 
         string getTitleType(){
@@ -32,7 +32,7 @@ class Movie{
         }
 
         void setPrimaryTitle(string primaryTitle){
-            primaryTitle = primaryTitle;
+            this->primaryTitle = primaryTitle;
         }
 
         string getPrimaryTitle(){
@@ -40,7 +40,7 @@ class Movie{
         }
 
         void setOriginalTitle(string originalTitle){
-            originalTitle = originalTitle;
+            this->originalTitle = originalTitle;
         }
 
         string getOriginalTitle(){
@@ -48,7 +48,7 @@ class Movie{
         }
 
         void setIsAdult(bool isAdult){
-            isAdult = isAdult;
+            this->isAdult = isAdult;
         }
 
         bool getIsAdult(){
@@ -56,7 +56,7 @@ class Movie{
         }
 
         void setStartYear(int startYear){
-            startYear = startYear;
+            this->startYear = startYear;
         }
 
         int getStartYear(){
@@ -64,7 +64,7 @@ class Movie{
         }
 
         void setEndYear(int endYear){
-            endYear = endYear;
+            this->endYear = endYear;
         }
 
         int getEndYear(){
@@ -72,13 +72,13 @@ class Movie{
         }
 
         void setRuntimeMinutes(int runtimeMinutes){
-            runtimeMinutes = runtimeMinutes;
+            this->runtimeMinutes = runtimeMinutes;
         }
 
         int getRuntimeMinutes(){
             return runtimeMinutes;
         }
 
-        
+
 
 };
