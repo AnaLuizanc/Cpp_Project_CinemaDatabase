@@ -6,7 +6,9 @@ class Cinema{
     string name;
     int xCoordinate;
     int yCoordinate;
-    double preco;
+    double ticketPrice;
     Movie movies[];
+
+    
 
 }
