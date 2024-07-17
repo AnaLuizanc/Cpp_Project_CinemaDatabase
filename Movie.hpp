@@ -78,15 +78,17 @@ class Movie{
             return runtimeMinutes;
         }
 
-        /*void setGenres(string genre, int amount){
+        void setGenres(string genre, int amount){
             for (int i = 0; i < amount; i++){
                 genres[i] = genre;
             }
         }
 
         string getGenres(){
-            return 
-        }*/ 
-
+            for (int i = 0; i < genres->length; i++){
+                cout >> genres[i];
+            }
+            
+        } 
 
 };
