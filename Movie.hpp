@@ -27,7 +27,7 @@ public:
             this->endYear = endYear;
             this->startYear = startYear;
             this->runtimeMinutes = runtimeMinutes;
-            for (int i = 0; i < g.size(); i++)
+            for (int i = 0; i < genres.size(); i++)
                 this->genres.push_back(genres[i]);
         }
         

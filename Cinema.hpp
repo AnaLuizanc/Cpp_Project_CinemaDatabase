@@ -1,5 +1,3 @@
-//include <string>
-//#include <vector>
 #include "Movie.hpp"
 using namespace std;
 
@@ -52,9 +50,9 @@ class Cinema{
             return ticketPrice;
         }
 
-        void setMovies(Movie moviesX[], int amount){// string movies[] -> List<Movie> movies
-            for (int i = 0; i < amount; i++){
-                this->movies.push_back(moviesX[i]);
+        void setMovies(vector<Movie> movies){
+            for (int i = 0; i < movies.size(); i++){
+                this->movies.push_back(movies.at(i));
             }
         }
 
