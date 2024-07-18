@@ -79,14 +79,14 @@ class Movie{
             return runtimeMinutes;
         }
 
-        /*void setGenres(string genres[], int amount){
+        void setGenres(string genresX[], int amount){
             for (int i = 0; i < amount; i++){
-                this->genres.push_back(genres[i]);
+                this->genres.push_back(genresX[i]);
             }
         }
 
         vector<string> getGenres(){
             return genres;
-        }*/
+        }
 
 };
