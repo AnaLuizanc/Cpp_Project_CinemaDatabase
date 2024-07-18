@@ -1,6 +1,8 @@
 
 #include <string>
 #include <vector>
+#include <array>
+
 using namespace std;
 
 class Movie{
@@ -14,7 +16,21 @@ class Movie{
     int runtimeMinutes;
     vector<string> genres;
 
-    public:
+
+public:
+        Movie(string tconst, string titleType, string primaryTitle, string originalTitle, bool isAdult, int startYear, int endYear, int runtimeMinutes, vector<string> genres){
+            this->tconst = tconst;
+            this->titleType = titleType;
+            this->primaryTitle = primaryTitle;
+            this->originalTitle = originalTitle;
+            this->isAdult = isAdult;
+            this->endYear = endYear;
+            this->startYear = startYear;
+            this->runtimeMinutes = runtimeMinutes;
+            for (int i = 0; i < g.size(); i++)
+                this->genres.push_back(genres[i]);
+        }
+        
         void setTconst(string tconst){
             this->tconst = tconst;
         }
@@ -73,15 +89,15 @@ class Movie{
 
         void setRuntimeMinutes(int runtimeMinutes){
             this->runtimeMinutes = runtimeMinutes;
-        }
+        }   
 
         int getRuntimeMinutes(){
             return runtimeMinutes;
         }
 
-        void setGenres(string genresX[], int amount){
-            for (int i = 0; i < amount; i++){
-                this->genres.push_back(genresX[i]);
+        void setGenres(vector<string> genres){
+            for (int i = 0; i < genres.size(); i++){
+                this->genres.push_back(genres.at(i));
             }
         }
 
