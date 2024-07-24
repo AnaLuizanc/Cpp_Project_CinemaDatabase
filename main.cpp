@@ -42,7 +42,7 @@ int main(){
     cout << "Digite o número ID do Cinema: " << endl;
     cin >> cinemaIDValue;
             
-    int returncode = sqlFunc("Cinemas.db", cinemaIDValue);
+    int returncode = sqlFunc("./Database/Cinemas.db", cinemaIDValue);
 
     if(returncode == 1)
         cout << endl << "Consulta realizada com sucesso" << endl;
