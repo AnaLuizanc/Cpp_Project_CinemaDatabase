@@ -3,13 +3,7 @@
 #include <vector>
 #include "Cinema.hpp"
 #include <fstream>
-
-
 using namespace std;
-
-
-
-
 
 int main(){
     string filename = "./Database/cinemas.txt";
