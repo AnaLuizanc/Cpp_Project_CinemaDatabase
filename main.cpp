@@ -3,6 +3,8 @@
 #include <vector>
 #include "Cinema.hpp"
 #include <fstream>
+#include <sstream>
+#include <string>
 
 
 using namespace std;
@@ -25,25 +27,48 @@ int main(){
             matriz.push_back(vetor);
 
         }
-    
-    vector<vector<string>> matriz2;
-
-    for(int i=0; i<5; i++){
-        matriz2.push_back(matriz[i]);
-        //strcpy(matriz[i][1], "Filme 1");
-        //str
-    }
-    
-    for(int i=0; i< 5; i++){
-        for(int j=0; j<4; j++){
-            cout << matriz2[i][j]; 
+        
+        //impressão da matriz
+        for(const auto& linha : matriz){
+            for(const auto& elemento : linha){
+                cout << elemento << " ";
+            }
+            cout << endl;
         }
-        cout << endl;
-    }
 
+        //imprimir SilverScreen Cinema
+        cout << matriz[3].at(1) << endl;
+        
+        //imprime coluna 0
+        for(const auto& linha : matriz){
+            if(0 < linha.size()){
+                cout << linha[0] << endl;
+            }
+        }
 
-    
+        vector<vector<string>> matriz2;
+        vector<int> colunas = {0, 5, 6, 7, 8};
+        vector<string> cabecalho = {"Cinema_ID", "Filme_1", "Filme_2", "Filme_3", "Filme_4"};
+        matriz2.push_back(cabecalho);
 
+        for(const auto& linha : matriz){
+            vector<string> novaLinha;
+            for (int i : colunas) {
+                if (i < linha.size()) {
+                    novaLinha.push_back(linha[i]);
+                }
+            }
+            matriz2.push_back(novaLinha);
+        }
+
+        matriz2.erase(matriz2.begin() + 1);
+        
+        for(const auto& linha : matriz2){
+            for(const auto& elemento : linha){
+                cout << elemento << " ";
+            }
+            cout << endl;
+        }
     }
 
     return 0;
