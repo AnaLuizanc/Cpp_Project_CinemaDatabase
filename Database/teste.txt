@@ -1,0 +1,5 @@
+Cinema_ID, Nome_do_Cinema, Coordenada_X, Coordenada_Y, Preço_Ingresso, Filmes_Em_Exibição
+cc00001, Cineplex Estrela, 347865, 478921, 12.50, tt8000001, tt8000023, tt8000056
+cc00009, Galaxy Multiplex, 876543, 210987, 13.50, tt8001345, tt8001456, tt8001589
+cc00010, SilverScreen Cinema, 321098, 987654, 11.25, tt8001789, tt8001876
+cc00011, Liberty Theater, 456789, 543210, 10.75, tt8001901, tt8001987

@@ -3,6 +3,8 @@
 #include <vector>
 #include "Cinema.hpp"
 #include <fstream>
+#include <sstream>
+#include <string>
 
 
 using namespace std;
@@ -12,38 +14,43 @@ using namespace std;
 
 
 int main(){
-    string filename = "./Database/cinemas.txt";
-    string filename2 = "./Database/movies.txt";
+    ifstream arquivo("./Database/teste.txt");
+    string linha;
 
+    vector<vector<string>>matriz;
 
-    string fileContents;
-    string fileContents2;
+    if(arquivo.is_open()){
+        while(getline(arquivo, linha)){
+            stringstream ss(linha);
+            string item;
+            vector<string> vetor;
 
-    ifstream inputFile(filename);
-    ifstream inputFile2(filename2);
+            while(getline(ss, item, ',')){
+                vetor.push_back(item);
+            }
+            matriz.push_back(vetor);
 
-    if(inputFile.is_open() && inputFile2.is_open()){
-        fileContents.assign((istreambuf_iterator<char>(inputFile)),
-                            (istreambuf_iterator<char>()));
+        }
+    
+    vector<vector<string>> matriz2;
 
-        fileContents2.assign((istreambuf_iterator<char>(inputFile2)),
-                            (istreambuf_iterator<char>()));
-
-                        
-
-        inputFile.close();        
-
-        cout << fileContents << endl;
-        cout << fileContents2 << endl;
-    }else{
-        cerr << "Error opening file: " << filename << endl;
-        cerr << "Error opening file: " << filename2 << endl;
-
+    for(int i=0; i<5; i++){
+        matriz2.push_back(matriz[i]);
+        //strcpy(matriz[i][1], "Filme 1");
+        //str
+    }
+    
+    for(int i=0; i< 5; i++){
+        for(int j=0; j<4; j++){
+            cout << matriz2[i][j]; 
+        }
+        cout << endl;
     }
 
 
+    
 
-
+    }
 
     return 0;
 }   
