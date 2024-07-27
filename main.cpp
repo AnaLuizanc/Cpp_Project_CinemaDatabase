@@ -5,15 +5,38 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-
-
 using namespace std;
+
+
+void imprime(vector<vector<string>> dados){
+    for(int i=1; i<dados[i].size(); i++){
+        for(int j=0; j<dados.size(); j++)
+            cout << dados[i][0] << " ";
+    }   
+    cout << endl;
+} 
+
+
+
+void ordenaInsertion(vector<vector<string>> dados){
+    for(int i=0; i<dados.size(); i++){
+        int j = i-1;
+        string aux = dados[i][1];
+        while(j >= 0 && aux < dados[j][1]){
+            dados[j+1][1] = dados[j][1];
+            j--;
+        }
+        dados[j+1][1] = aux;
+    }
+    //imprime(dados);
+}
+
 
 int main(){
     ifstream arquivo("./Database/teste.txt");
     string linha;
 
-    vector<vector<string>>matriz;
+    vector<vector<string>> dados;
 
     if(arquivo.is_open()){
         while(getline(arquivo, linha)){
@@ -24,23 +47,47 @@ int main(){
             while(getline(ss, item, ',')){
                 vetor.push_back(item);
             }
-            matriz.push_back(vetor);
+            dados.push_back(vetor);
 
         }
-        
-        //impressão da matriz
-        for(const auto& linha : matriz){
+
+        cout << dados[0].size() << endl;
+
+        //impressão da dados
+        for(const auto& linha : dados){
             for(const auto& elemento : linha){
                 cout << elemento << " ";
             }
             cout << endl;
         }
 
-        //imprimir SilverScreen Cinema
-        cout << matriz[3].at(1) << endl;
+        ordenaInsertion(dados);
+
+        for(const auto& linha : dados){
+            for(const auto& elemento : linha){
+                cout << elemento << " ";
+            }
+            cout << endl;
+        }
+
+
+    }
+
+    return 0;
+}   
+
+/*
+
+//impressão da dados
+        for(const auto& linha : dados){
+            for(const auto& elemento : linha){
+                cout << elemento << " ";
+            }
+            cout << endl;
+        }
         
         //imprime coluna 0
-        for(const auto& linha : matriz){
+        for(const auto& linha : dados){
             if(0 < linha.size()){
                 cout << linha[0] << endl;
             }
@@ -55,7 +102,6 @@ int main(){
             vector<string> novaLinha;
             for (int i : colunas) {
                 if (i < linha.size()) {
-                    cout << linha.size() <<  endl;
                     novaLinha.push_back(linha[i]);
                 }
             }
@@ -70,7 +116,6 @@ int main(){
             }
             cout << endl;
         }
-    }
 
-    return 0;
-}   
+
+*/
