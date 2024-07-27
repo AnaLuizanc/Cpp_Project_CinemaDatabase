@@ -55,6 +55,7 @@ int main(){
             vector<string> novaLinha;
             for (int i : colunas) {
                 if (i < linha.size()) {
+                    cout << linha.size() <<  endl;
                     novaLinha.push_back(linha[i]);
                 }
             }
