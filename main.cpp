@@ -10,23 +10,32 @@
 using namespace std;
 
 void imprimeColuna(vector<vector<string>> lista){
-    for(int i = 0; i < lista.size(); i++)
-        cout << lista[i][1] << endl;
+    for(const auto& linha : lista){
+            for(const auto& elemento : linha){
+                cout << elemento << " ";
+            }
+            cout << endl;
+        }
     cout << endl;
 }
 
-vector<vector<string>> selectionSort(vector<vector<string>> lista){
+void swapLine(vector<vector<string>>& lista, int i, int j){
+    vector<string> aux = lista[i];
+    lista[i] = lista[j];
+    lista[j] = aux;
+}
+
+void selectionSort(vector<vector<string>>& lista){
    for(int i = 1; i < lista.size(); i++){
         string aux = lista[i][1];
         int j = i - 1;
         while(j >= 1 && lista[j][1] > aux){
-            lista[j + 1][1] = lista[j][1];
+            swapLine(lista, j + 1, j);
 
             j--;
         }
         lista[j + 1][1] = aux;
    }
-    return lista;
 }
 
 int main(){
@@ -49,8 +58,8 @@ int main(){
         }
         imprimeColuna(matriz);
 
-        matriz = selectionSort(matriz);
-        
+        selectionSort(matriz);
+
         imprimeColuna(matriz);
         
         //impressão da matriz
