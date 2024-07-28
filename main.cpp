@@ -39,7 +39,7 @@ void selectionSort(vector<vector<string>>& lista){
 }
 
 int main(){
-    ifstream arquivo("./Database/teste.txt");
+    ifstream arquivo("./Database/cinemas.txt");
     string linha;
 
     vector<vector<string>>matriz;
