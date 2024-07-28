@@ -28,17 +28,38 @@ void swapLine(vector<vector<string>>& lista, int i, int j){
     lista[j] = aux;
 }
 
-void selectionSort(vector<vector<string>>& lista){
-   for(int i = 1; i < lista.size(); i++){
-        string aux = lista[i][1];
-        int j = i - 1;
-        while(j >= 1 && lista[j][1] > aux){
-            swapLine(lista, j + 1, j);
+void selectionSort(vector<vector<string>>& lista, int opc){
+    //1 ordena por nome
+    //2 ordena por valor
 
-            j--;
+    if(opc == 1){
+        for(int i = 1; i < lista.size(); i++){
+            string aux = lista[i][1];
+            int j = i - 1;
+            while(j >= 1 && lista[j][1] > aux){
+                swapLine(lista, j + 1, j);
+
+                j--;
+            }
+            lista[j + 1][1] = aux;
         }
-        lista[j + 1][1] = aux;
-   }
+    }
+    else if(opc == 2){
+        for(int i = 1; i < lista.size(); i++){
+            float value = stof(lista[i][4]);
+            string aux = lista[i][4];
+
+            int j = i - 1;
+
+            while(j >= 1 && stof(lista[j][4]) > value){
+                swapLine(lista, j + 1, j);
+                j--;
+            }
+
+            lista[j + 1][4] = aux;
+        }
+    }
+   
 }
 
 bool isRepeated(vector<vector<string>>& lista, string valueToCompare){
@@ -63,6 +84,8 @@ void oneCinema(vector<vector<string>>& lista){
     imprimeColuna(noRepeatedCinemas);
 }
 
+
+
 int main(){
     ifstream arquivo("./Database/cinemas.txt");
     string linha;
@@ -81,13 +104,22 @@ int main(){
             matriz.push_back(vetor);
 
         }
+        //imprimeColuna(matriz);
+
+        //selectionSort(matriz, 1);
+
+        //imprimeColuna(matriz);
+
+        //oneCinema(matriz);
+
+        selectionSort(matriz, 2);
         imprimeColuna(matriz);
+        cout << "Cinema mais caro: " << endl;
 
-        selectionSort(matriz);
+        vector<vector<string>> maiorValor;
+        maiorValor.push_back(matriz[matriz.size() - 1]);
 
-        imprimeColuna(matriz);
-
-        oneCinema(matriz);
+        imprimeColuna(maiorValor);
         
         //impressão da matriz
         /*for(const auto& linha : matriz){
