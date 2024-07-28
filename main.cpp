@@ -9,6 +9,26 @@
 
 using namespace std;
 
+void imprimeColuna(vector<vector<string>> lista){
+    for(int i = 0; i < lista.size(); i++)
+        cout << lista[i][1] << endl;
+    cout << endl;
+}
+
+vector<vector<string>> selectionSort(vector<vector<string>> lista){
+   for(int i = 1; i < lista.size(); i++){
+        string aux = lista[i][1];
+        int j = i - 1;
+        while(j >= 1 && lista[j][1] > aux){
+            lista[j + 1][1] = lista[j][1];
+
+            j--;
+        }
+        lista[j + 1][1] = aux;
+   }
+    return lista;
+}
+
 int main(){
     ifstream arquivo("./Database/teste.txt");
     string linha;
@@ -27,9 +47,14 @@ int main(){
             matriz.push_back(vetor);
 
         }
+        imprimeColuna(matriz);
+
+        matriz = selectionSort(matriz);
+        
+        imprimeColuna(matriz);
         
         //impressão da matriz
-        for(const auto& linha : matriz){
+        /*for(const auto& linha : matriz){
             for(const auto& elemento : linha){
                 cout << elemento << " ";
             }
@@ -69,7 +94,7 @@ int main(){
                 cout << elemento << " ";
             }
             cout << endl;
-        }
+        }*/
     }
 
     return 0;
