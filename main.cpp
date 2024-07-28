@@ -10,6 +10,9 @@
 using namespace std;
 
 void imprimeColuna(vector<vector<string>> lista){
+    cout << endl;
+    cout << "Número de linhas: " << lista.size() << endl;
+    cout << endl;
     for(const auto& linha : lista){
             for(const auto& elemento : linha){
                 cout << elemento << " ";
@@ -38,6 +41,28 @@ void selectionSort(vector<vector<string>>& lista){
    }
 }
 
+bool isRepeated(vector<vector<string>>& lista, string valueToCompare){
+    for(int i = 1; i < lista.size(); i++){
+        if(lista[i][1] == valueToCompare){
+            return true;
+        }
+    }
+    return false;
+}
+
+void oneCinema(vector<vector<string>>& lista){
+    vector<vector<string>> noRepeatedCinemas;
+    noRepeatedCinemas.push_back(lista[0]);
+
+    for(int i = 1; i < lista.size(); i++){
+        if(isRepeated(noRepeatedCinemas, lista[i][1]) == false){
+            noRepeatedCinemas.push_back(lista[i]);
+        }
+    }
+
+    imprimeColuna(noRepeatedCinemas);
+}
+
 int main(){
     ifstream arquivo("./Database/cinemas.txt");
     string linha;
@@ -61,6 +86,8 @@ int main(){
         selectionSort(matriz);
 
         imprimeColuna(matriz);
+
+        oneCinema(matriz);
         
         //impressão da matriz
         /*for(const auto& linha : matriz){
