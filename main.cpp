@@ -157,8 +157,11 @@ int main(){
             matrizFilme.push_back(vetor);
 
         }
+    }
         imprime(matrizFilme);
+    return 0;
 
+}   
 
         
         //impressão da matriz
@@ -170,12 +173,9 @@ int main(){
         }
 
 
-    }
-
-    return 0;
-}   
 
 /*
+
 
 //impressão da dados
         for(const auto& linha : dados){
@@ -214,7 +214,7 @@ int main(){
                 cout << elemento << " ";
             }
             cout << endl;
-        }*/
+        }
     }
 
 */
