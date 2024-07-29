@@ -9,9 +9,10 @@
 
 using namespace std;
 
-void imprimeColuna(vector<vector<string>> lista){
+void imprime(vector<vector<string>> lista){
     cout << endl;
     cout << "Número de linhas: " << lista.size() << endl;
+    cout << "Número de colunas: " << lista[0].size() << endl;
     cout << endl;
     for(const auto& linha : lista){
             for(const auto& elemento : linha){
@@ -22,11 +23,21 @@ void imprimeColuna(vector<vector<string>> lista){
     cout << endl;
 }
 
+void imprimeUmaLinha(vector<vector<string>> lista, int valorLinha){
+    cout << endl;
+    vector<string> linha = lista[valorLinha];
+    
+    for(const auto& elemento: linha)
+        cout << elemento << " ";
+}
+
 void swapLine(vector<vector<string>>& lista, int i, int j){
     vector<string> aux = lista[i];
     lista[i] = lista[j];
     lista[j] = aux;
 }
+
+
 
 void selectionSort(vector<vector<string>>& lista, int opc){
     //1 ordena por nome
@@ -59,6 +70,21 @@ void selectionSort(vector<vector<string>>& lista, int opc){
             lista[j + 1][4] = aux;
         }
     }
+
+    else if(opc == 3){
+        for(int i = 1; i < lista.size(); i++){
+            string aux = lista[i][5];
+
+            int j = i - 1;
+
+            while(j >= 1 && lista[j][1] == "movie"){
+                swapLine(lista, j + 1, j);
+                j--;
+            }
+
+            lista[j + 1][1] = aux;
+        }
+    }
    
 }
 
@@ -81,19 +107,36 @@ void oneCinema(vector<vector<string>>& lista){
         }
     }
 
-    imprimeColuna(noRepeatedCinemas);
+    imprime(noRepeatedCinemas);
 }
 
+void printJustMovies(vector<vector<string>> lista){
+    vector<vector<string>> justMovies;
+    justMovies.push_back(lista[0]);
+    justMovies.push_back(lista[1]);
+    cout << "AAAAAA";
+    for(int i = 1; i < lista.size(); i++){
+        if(lista[i][1] == "movie"){
+            //justMovies.push_back(lista[i]);
+            imprimeUmaLinha(lista, i);
+        }
+    }
 
+    //imprime(justMovies);
+
+
+}
 
 int main(){
-    ifstream arquivo("./Database/cinemas.txt");
+    ifstream arquivoCinema("./Database/cinemas.txt");
+    ifstream arquivoFilme("./Database/movies.txt");
     string linha;
 
-    vector<vector<string>>matriz;
+    vector<vector<string>>matrizCinema;
+    vector<vector<string>>matrizFilme;
 
-    if(arquivo.is_open()){
-        while(getline(arquivo, linha)){
+    if(arquivoCinema.is_open() && arquivoFilme.is_open()){
+        while(getline(arquivoCinema, linha)){
             stringstream ss(linha);
             string item;
             vector<string> vetor;
@@ -101,25 +144,24 @@ int main(){
             while(getline(ss, item, ',')){
                 vetor.push_back(item);
             }
-            matriz.push_back(vetor);
+            matrizCinema.push_back(vetor);
 
         }
-        //imprimeColuna(matriz);
 
-        //selectionSort(matriz, 1);
+        while(getline(arquivoFilme, linha)){
+            stringstream ss(linha);
+            string item;
+            vector<string> vetor;
 
-        //imprimeColuna(matriz);
+            while(getline(ss, item, '\t')){
+                vetor.push_back(item);
+            }
+            matrizFilme.push_back(vetor);
 
-        //oneCinema(matriz);
+        }
+        imprime(matrizFilme);
 
-        selectionSort(matriz, 2);
-        imprimeColuna(matriz);
-        cout << "Cinema mais caro: " << endl;
 
-        vector<vector<string>> maiorValor;
-        maiorValor.push_back(matriz[matriz.size() - 1]);
-
-        imprimeColuna(maiorValor);
         
         //impressão da matriz
         /*for(const auto& linha : matriz){
