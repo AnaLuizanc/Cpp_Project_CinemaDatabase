@@ -7,39 +7,134 @@
 #include <string>
 using namespace std;
 
-
-void imprime(vector<vector<string>> dados){
-    for(int i=1; i<dados[i].size(); i++){
-        for(int j=0; j<dados.size(); j++)
-            cout << dados[i][0] << " ";
-    }   
+void imprime(vector<vector<string>> lista){
     cout << endl;
-} 
-
-
-
-void ordenaInsertion(vector<vector<string>> dados){
-    for(int i=0; i<dados.size(); i++){
-        int j = i-1;
-        string aux = dados[i][1];
-        while(j >= 0 && aux < dados[j][1]){
-            dados[j+1][1] = dados[j][1];
-            j--;
+    cout << "Número de linhas: " << lista.size() << endl;
+    cout << "Número de colunas: " << lista[0].size() << endl;
+    cout << endl;
+    for(const auto& linha : lista){
+            for(const auto& elemento : linha){
+                cout << elemento << " ";
+            }
+            cout << endl;
         }
-        dados[j+1][1] = aux;
-    }
-    //imprime(dados);
+    cout << endl;
+}
+
+void imprimeUmaLinha(vector<vector<string>> lista, int valorLinha){
+    cout << endl;
+    vector<string> linha = lista[valorLinha];
+    
+    for(const auto& elemento: linha)
+        cout << elemento << " ";
+}
+
+void swapLine(vector<vector<string>>& lista, int i, int j){
+    vector<string> aux = lista[i];
+    lista[i] = lista[j];
+    lista[j] = aux;
 }
 
 
+
+void selectionSort(vector<vector<string>>& lista, int opc){
+    //1 ordena por nome
+    //2 ordena por valor
+
+    if(opc == 1){
+        for(int i = 1; i < lista.size(); i++){
+            string aux = lista[i][1];
+            int j = i - 1;
+            while(j >= 1 && lista[j][1] > aux){
+                swapLine(lista, j + 1, j);
+
+                j--;
+            }
+            lista[j + 1][1] = aux;
+        }
+    }
+    else if(opc == 2){
+        for(int i = 1; i < lista.size(); i++){
+            float value = stof(lista[i][4]);
+            string aux = lista[i][4];
+
+            int j = i - 1;
+
+            while(j >= 1 && stof(lista[j][4]) > value){
+                swapLine(lista, j + 1, j);
+                j--;
+            }
+
+            lista[j + 1][4] = aux;
+        }
+    }
+
+    else if(opc == 3){
+        for(int i = 1; i < lista.size(); i++){
+            string aux = lista[i][5];
+
+            int j = i - 1;
+
+            while(j >= 1 && lista[j][1] == "movie"){
+                swapLine(lista, j + 1, j);
+                j--;
+            }
+
+            lista[j + 1][1] = aux;
+        }
+    }
+   
+}
+
+bool isRepeated(vector<vector<string>>& lista, string valueToCompare){
+    for(int i = 1; i < lista.size(); i++){
+        if(lista[i][1] == valueToCompare){
+            return true;
+        }
+    }
+    return false;
+}
+
+void oneCinema(vector<vector<string>>& lista){
+    vector<vector<string>> noRepeatedCinemas;
+    noRepeatedCinemas.push_back(lista[0]);
+
+    for(int i = 1; i < lista.size(); i++){
+        if(isRepeated(noRepeatedCinemas, lista[i][1]) == false){
+            noRepeatedCinemas.push_back(lista[i]);
+        }
+    }
+
+    imprime(noRepeatedCinemas);
+}
+
+void printJustMovies(vector<vector<string>> lista){
+    vector<vector<string>> justMovies;
+    justMovies.push_back(lista[0]);
+    justMovies.push_back(lista[1]);
+    cout << "AAAAAA";
+    for(int i = 1; i < lista.size(); i++){
+        if(lista[i][1] == "movie"){
+            //justMovies.push_back(lista[i]);
+            imprimeUmaLinha(lista, i);
+        }
+    }
+
+    //imprime(justMovies);
+
+
+}
+
 int main(){
-    ifstream arquivo("./Database/teste.txt");
+    ifstream arquivoCinema("./Database/cinemas.txt");
+    ifstream arquivoFilme("./Database/movies.txt");
     string linha;
 
-    vector<vector<string>> dados;
+    vector<vector<string>>matrizCinema;
+    vector<vector<string>>matrizFilme;
 
-    if(arquivo.is_open()){
-        while(getline(arquivo, linha)){
+    if(arquivoCinema.is_open() && arquivoFilme.is_open()){
+        while(getline(arquivoCinema, linha)){
             stringstream ss(linha);
             string item;
             vector<string> vetor;
@@ -47,23 +142,27 @@ int main(){
             while(getline(ss, item, ',')){
                 vetor.push_back(item);
             }
-            dados.push_back(vetor);
+            matrizCinema.push_back(vetor);
 
         }
 
-        cout << dados[0].size() << endl;
+        while(getline(arquivoFilme, linha)){
+            stringstream ss(linha);
+            string item;
+            vector<string> vetor;
 
-        //impressão da dados
-        for(const auto& linha : dados){
-            for(const auto& elemento : linha){
-                cout << elemento << " ";
+            while(getline(ss, item, '\t')){
+                vetor.push_back(item);
             }
-            cout << endl;
+            matrizFilme.push_back(vetor);
+
         }
+        imprime(matrizFilme);
 
-        ordenaInsertion(dados);
 
-        for(const auto& linha : dados){
+        
+        //impressão da matriz
+        /*for(const auto& linha : matriz){
             for(const auto& elemento : linha){
                 cout << elemento << " ";
             }
@@ -115,7 +214,7 @@ int main(){
                 cout << elemento << " ";
             }
             cout << endl;
-        }
-
+        }*/
+    }
 
 */
