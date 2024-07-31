@@ -1,0 +1,5 @@
+cc00001, Cineplex Estrela, 347865, 478921, 12.50
+cc00002, CineArt Palace, 123456, 789012, 10.00
+cc00003, Grand CineRoyal, 982134, 567890, 11.75
+cc00004, MegaFlix Cinemas, 654321, 123456, 13.00
+cc00005, StarView Cinema, 234567, 876543, 9.50
