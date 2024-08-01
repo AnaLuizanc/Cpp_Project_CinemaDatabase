@@ -95,6 +95,16 @@ public:
             return runtimeMinutes;
         }
 
+        void setGenres(vector<string> genres){
+            for(int i=0; i < genres.size(); i++)
+                this->genres.push_back(genres[i]);
+        }
+
+        void getGenres(){
+            for(int i=0; i < this->genres.size(); i++)
+                cout << this->genres[i] << endl;
+            cout << endl;
+        }
 };
 
 
@@ -129,6 +139,7 @@ class Cinema{
     string xCoordinate;
     string yCoordinate;
     string ticketPrice;
+    vector<string> movies; 
 
     public:
         void setCinemaID(string cinemaID){
@@ -169,6 +180,17 @@ class Cinema{
 
         string getTicketPrice(){
             return ticketPrice;
+        }
+
+        void setMovies(vector<string> movies){
+            for(int i=0; i<movies.size(); i++)
+                this->movies.push_back(movies[i]);
+        }
+
+        void getMovies(){
+            for(int i=0; i<this->movies.size(); i++)
+                cout << this->movies[i] << endl;
+            cout << endl;
         }
 };
 
@@ -249,19 +271,25 @@ int main(){
     vector<string> linhaMovies;
 
     Cinema titulo;
+
+    vector<string> vetMovies;
+    vetMovies.push_back("Filmes_em_Exibicao");
     
     titulo.setCinemaID("Cinema_ID");
     titulo.setName("Nome_do_Cinema");
     titulo.setXCoordinate("Coordenada_X");
     titulo.setYCoordinate("Coordenada_Y");
     titulo.setTicketPrice("Preço_Ingresso");
+    titulo.setMovies(vetMovies);
+
+    titulo.getMovies();
 
     Movie tituloM("tconst", "titleType", "primaryTitle", "originalTitle", "isAdult", "startYear", "endYear", "runtimeMinutes");
 
     M.push_back(tituloM);
     //C.push_back(titulo);    
 
-    string linha;
+    /*string linha;
 
     if(arquivoCinema.is_open() && arquivoMovies.is_open())
         while(getline(arquivoCinema, linha)){
@@ -296,11 +324,10 @@ int main(){
 
    //searchByTipe(M, "short");
    //searchByYear(M, "2018");
-   searchByRangeYears(M, 1985, 1990);
+   //searchByRangeYears(M, 1985, 1990);
 
-
-   string anoS = M[1].getStartYear();
-   int anosI = stoi(anoS);
+   //string anoS = M[1].getStartYear();
+   //int anosI = stoi(anoS);
    //cout << anoS << endl << anosI << endl;
 
     //selectionSort(C);
