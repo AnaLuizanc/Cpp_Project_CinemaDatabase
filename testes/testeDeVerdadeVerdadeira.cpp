@@ -210,12 +210,32 @@ void selectionSort(vector<Cinema>& c){
     }
 }
 
-void searchByTipe(vector<Movie> M, string value){
-    if(value == "short"){
-        for(int i = 0; i < M.size(); i++)
-            if(M[i].getTitleType() == "short"){
+void searchByType(vector<Movie> M, string value){
+    for(int i = 0; i < M.size(); i++)
+        if(M[i].getTitleType() == value){
+            imprimeMovie(M[i]);
+        }
+}
+
+
+void searchByYear(vector<Movie> M, string value){
+    for(int i=0; i < M.size(); i++){
+        if(M[i].getStartYear() == value || M[i].getEndYear() == value)
+            imprimeMovie(M[i]);
+    }
+}
+
+void searchByRangeYears(vector<Movie> M, int startValue, int endValue){
+    for(int i=1; i < M.size(); i++){
+        int startYear = stoi(M[i].getStartYear());
+        string s = "\\N";
+        if(M[i].getEndYear() == s)
+            continue;
+        else{
+            int endYear = stoi(M[i].getEndYear());
+            if(startValue >= startYear && endYear <= endValue)
                 imprimeMovie(M[i]);
-            }
+        }
     }
 }
 
@@ -249,7 +269,6 @@ int main(){
 
             stringstream ss(linha);
             string item;
-
             while(getline(ss, item, ',')){
                 linhaCinema.push_back(item);
             }
@@ -275,7 +294,14 @@ int main(){
         cout << endl;
     }*/
 
-   searchByTipe(M, "short");
+   //searchByTipe(M, "short");
+   //searchByYear(M, "2018");
+   searchByRangeYears(M, 1985, 1990);
+
+
+   string anoS = M[1].getStartYear();
+   int anosI = stoi(anoS);
+   //cout << anoS << endl << anosI << endl;
 
     //selectionSort(C);
 
