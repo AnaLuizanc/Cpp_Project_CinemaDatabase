@@ -210,6 +210,14 @@ void selectionSort(vector<Cinema>& c){
     }
 }
 
+void searchByTipe(vector<Movie> M, string value){
+    if(value == "short"){
+        for(int i = 0; i < M.size(); i++)
+            if(M[i].getTitleType() == "short"){
+                imprimeMovie(M[i]);
+            }
+    }
+}
 
 int main(){
     ifstream arquivoCinema("./cinemasTest.txt");
@@ -262,10 +270,12 @@ int main(){
     //for(int i = 0; i < C.size(); i++)
       //  imprimeCinema(C[i]);
 
-    for(int i = 0; i < M.size(); i++){
-        imprimeMovie(M[i]);
+    /*for(int i = 0; i < M.size(); i++){
+        cout << M[i].getTitleType();
         cout << endl;
-    }
+    }*/
+
+   searchByTipe(M, "short");
 
     //selectionSort(C);
 
