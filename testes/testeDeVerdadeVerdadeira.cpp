@@ -18,21 +18,7 @@ class Movie{
     string runtimeMinutes;
     vector<string> genres;
 
-
-public:
-        /*Movie(string tconst, string titleType, string primaryTitle, string originalTitle, string isAdult, string startYear, string endYear, string runtimeMinutes/*, vector<string> genres){
-            this->tconst = tconst;
-            this->titleType = titleType;
-            this->primaryTitle = primaryTitle;
-            this->originalTitle = originalTitle;
-            this->isAdult = isAdult;
-            this->endYear = endYear;
-            this->startYear = startYear;
-            this->runtimeMinutes = runtimeMinutes;
-            //for(int i=0; i < genres.size(); i++)
-                //this->genres.push_back(genres[i]);
-        }*/
-        
+    public:
         void setTconst(string tconst){
             this->tconst = tconst;
         }
@@ -108,14 +94,6 @@ public:
             cout << endl;
         }
 };
-
-
-//void insertMovie(vector<string> coluna, vector<Movie>& Movies){
-    //Movie* novo = new Movie(coluna[0], coluna[1], coluna[2], coluna[3], coluna[4], coluna[5], coluna[6], coluna[7]/*, coluna[8]);
-
-    //Movies.push_back(*novo);
-//}
-
 
 void insertMovie(vector<string> coluna, vector<Movie>& Movies){
     Movie novo;
@@ -316,8 +294,10 @@ void searchByRangeYears(vector<Movie> M, int startValue, int endValue){
 }
 
 int main(){
-    ifstream arquivoCinema("./cinemasTest.txt");
-    ifstream arquivoMovies("./moviesTest.txt");
+    ifstream arquivoCinema("../Database/cinemas.txt");
+    ifstream arquivoMovies("../Database/movies.txt");
+
+    
 
     vector <Cinema> C;
 
@@ -335,10 +315,7 @@ int main(){
 
     //imprimeCinema(titulo);
 
-
     vector <Movie> M;
-
-    //Movie tituloM("tconst", "titleType", "primaryTitle", "originalTitle", "isAdult", "startYear", "endYear", "runtimeMinutes"/*, "genres"*/);
 
     //M.push_back(tituloM);
     C.push_back(titulo);   
