@@ -13,11 +13,6 @@ cc00020, Sunset Cinemagic, 765432, 109876, 9.25
 cc00021, CineGlobo, 543210, 876543, 12.00
 cc00022, CineMaximus, 789012, 345678, 11.75
 cc00023, Cinematique, 987654, 234567, 13.50
-cc00024, SilverScreen Deluxe, 234567, 567890
 cc00025, DreamCinema, 456789, 876543, 10.25
-cc00026, StarMotion Theaters, 654321, 109876
 cc00027, CinePrime, 876543, 321098, 14.75
-cc00028, Metroplex Spectra, 210987, 543210
 cc00029, CineGlamour, 567890, 987654, 10.50
-cc00030, RedCurtain Cinemas, 987654, 109876
-cc00031, Golden Era Cinema, 123456, 654321

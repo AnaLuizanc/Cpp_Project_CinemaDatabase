@@ -79,6 +79,20 @@ void imprimeCinema(Cinema a){
     cout << endl;
 }
 
+void selectionSort(vector<Cinema>& c){
+    for(int i = 1; i < c.size(); i++){
+        Cinema aux = c[i];
+        int j = i - 1;
+
+        while(j >= 0 && c[j].getName() > aux.getName()){
+            aux = c[j+1];
+            c[j + 1] = c[j];
+            c[j] = aux;
+            j--;
+        }
+        c[j + 1] = aux;
+    }
+}
 
 
 int main(){
@@ -94,7 +108,7 @@ int main(){
     titulo.setYCoordinate("Coordenada_Y");
     titulo.setTicketPrice("Preço_Ingresso");
 
-    C.push_back(titulo);
+    //C.push_back(titulo);    
 
     string linha;
 
@@ -111,6 +125,11 @@ int main(){
             insertCinema(linhaCinema, C);
         }
 
+
+    //for(int i = 0; i < C.size(); i++)
+      //  imprimeCinema(C[i]);
+
+    selectionSort(C);
 
     for(int i = 0; i < C.size(); i++)
         imprimeCinema(C[i]);
