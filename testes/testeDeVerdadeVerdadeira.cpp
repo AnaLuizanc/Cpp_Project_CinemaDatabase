@@ -189,7 +189,7 @@ class Cinema{
 
         void getMovies(){
             for(int i=0; i<this->movies.size(); i++)
-                cout << this->movies[i] << endl;
+                cout << this->movies[i] << " ";
             cout << endl;
         }
 };
@@ -202,7 +202,11 @@ void insertCinema(vector<string> coluna, vector<Cinema>& Cinemas){
     novo.setXCoordinate(coluna[2]);
     novo.setYCoordinate(coluna[3]);
     novo.setTicketPrice(coluna[4]);
-
+    int contador = 5;
+    vector<string> movies;
+    while(contador < coluna.size())
+        movies.push_back(coluna[contador++]);
+    novo.setMovies(movies);
     Cinemas.push_back(novo);
 }
 
@@ -214,7 +218,7 @@ void imprimeCinema(Cinema a){
     cout << a.getXCoordinate() << " ";
     cout << a.getYCoordinate() << " ";
     cout << a.getTicketPrice() << " ";
-    cout << endl;
+    a.getMovies(); 
 }
 
 void selectionSort(vector<Cinema>& c){
@@ -266,9 +270,6 @@ int main(){
     ifstream arquivoMovies("./moviesTest.txt");
 
     vector <Cinema> C;
-    vector <Movie> M;
-    vector<string> linhaCinema;
-    vector<string> linhaMovies;
 
     Cinema titulo;
 
@@ -282,16 +283,22 @@ int main(){
     titulo.setTicketPrice("Preço_Ingresso");
     titulo.setMovies(vetMovies);
 
-    titulo.getMovies();
+    //imprimeCinema(titulo);
+
+
+    vector <Movie> M;
 
     Movie tituloM("tconst", "titleType", "primaryTitle", "originalTitle", "isAdult", "startYear", "endYear", "runtimeMinutes");
 
-    M.push_back(tituloM);
-    //C.push_back(titulo);    
+    //M.push_back(tituloM);
+    C.push_back(titulo);   
 
-    /*string linha;
+    vector<string> linhaCinema;
+    vector<string> linhaMovies;
+    
+    string linha;
 
-    if(arquivoCinema.is_open() && arquivoMovies.is_open())
+    if(arquivoCinema.is_open() && arquivoMovies.is_open()){
         while(getline(arquivoCinema, linha)){
             linhaCinema.erase(linhaCinema.begin(), linhaCinema.end());
 
@@ -312,10 +319,10 @@ int main(){
             }
             insertMovie(linhaMovies, M);
         }
+    }
 
-
-    //for(int i = 0; i < C.size(); i++)
-      //  imprimeCinema(C[i]);
+    for(int i = 0; i < C.size(); i++)
+        imprimeCinema(C[i]);
 
     /*for(int i = 0; i < M.size(); i++){
         cout << M[i].getTitleType();
