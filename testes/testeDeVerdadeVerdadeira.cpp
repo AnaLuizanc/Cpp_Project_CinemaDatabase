@@ -265,7 +265,7 @@ void merge(vector<Movie>& m, int left, int mid, int right){
     int i = 0, j = mid-left+1, k = left;
 
     while(i <= mid-left && j <= right-left){
-        if(aux[i].getTconst() <= aux[j].getTconst())
+        if(aux[i].getPrimaryTitle() <= aux[j].getPrimaryTitle())
             m[k++] = aux[i++];
         else
             m[k++] = aux[j++];
@@ -377,10 +377,15 @@ int main(){
     //for(int i = 0; i < C.size(); i++)
       //  imprimeCinema(C[i]);
 
-    //mergeSort(C,0,C.size()-1);
+    mergeSort(M,0,M.size()-1);
+
+    cout << "IMPRIME ORDENADO POR TITULO DAQUI PRA BAIXO" << endl;
+
+    for(int i=0; i < M.size(); i++)
+        imprimeMovie(M[i]);
 
     //for(int i = 0; i < C.size(); i++)
-      //  imprimeCinema(C[i]);
+        //imprimeCinema(C[i]);
 
     /*for(int i = 0; i < M.size(); i++){
         cout << M[i].getTitleType();
