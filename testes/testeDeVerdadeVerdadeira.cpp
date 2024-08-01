@@ -20,7 +20,7 @@ class Movie{
 
 
 public:
-        Movie(string tconst, string titleType, string primaryTitle, string originalTitle, string isAdult, string startYear, string endYear, string runtimeMinutes){
+        /*Movie(string tconst, string titleType, string primaryTitle, string originalTitle, string isAdult, string startYear, string endYear, string runtimeMinutes/*, vector<string> genres){
             this->tconst = tconst;
             this->titleType = titleType;
             this->primaryTitle = primaryTitle;
@@ -29,7 +29,9 @@ public:
             this->endYear = endYear;
             this->startYear = startYear;
             this->runtimeMinutes = runtimeMinutes;
-        }
+            //for(int i=0; i < genres.size(); i++)
+                //this->genres.push_back(genres[i]);
+        }*/
         
         void setTconst(string tconst){
             this->tconst = tconst;
@@ -63,7 +65,7 @@ public:
             return originalTitle;
         }
 
-        void setIsAdult(bool isAdult){
+        void setIsAdult(string isAdult){
             this->isAdult = isAdult;
         }
 
@@ -71,7 +73,7 @@ public:
             return isAdult;
         }
 
-        void setStartYear(int startYear){
+        void setStartYear(string startYear){
             this->startYear = startYear;
         }
 
@@ -79,7 +81,7 @@ public:
             return startYear;
         }
 
-        void setEndYear(int endYear){
+        void setEndYear(string endYear){
             this->endYear = endYear;
         }
 
@@ -87,7 +89,7 @@ public:
             return endYear;
         }
 
-        void setRuntimeMinutes(int runtimeMinutes){
+        void setRuntimeMinutes(string runtimeMinutes){
             this->runtimeMinutes = runtimeMinutes;
         }   
 
@@ -102,23 +104,41 @@ public:
 
         void getGenres(){
             for(int i=0; i < this->genres.size(); i++)
-                cout << this->genres[i] << endl;
+                cout << this->genres[i] << " ";
             cout << endl;
         }
 };
 
 
-void insertMovie(vector<string> coluna, vector<Movie>& Movies){
-    Movie* novo = new Movie(coluna[0]
-                          , coluna[1]
-                          , coluna[2]
-                          , coluna[3]
-                          , coluna[4]
-                          , coluna[5]
-                          , coluna[6]
-                          , coluna[7]);
+//void insertMovie(vector<string> coluna, vector<Movie>& Movies){
+    //Movie* novo = new Movie(coluna[0], coluna[1], coluna[2], coluna[3], coluna[4], coluna[5], coluna[6], coluna[7]/*, coluna[8]);
 
-    Movies.push_back(*novo);
+    //Movies.push_back(*novo);
+//}
+
+
+void insertMovie(vector<string> coluna, vector<Movie>& Movies){
+    Movie novo;
+
+    novo.setTconst(coluna[0]);
+    novo.setTitleType(coluna[1]);
+    novo.setPrimaryTitle(coluna[2]);
+    novo.setOriginalTitle(coluna[3]);
+    novo.setIsAdult(coluna[4]);
+    novo.setStartYear(coluna[5]);
+    novo.setEndYear(coluna[6]);
+    novo.setRuntimeMinutes(coluna[7]);
+
+    string linha = coluna[8];
+    stringstream ss(linha);
+    string item;
+    vector<string> genres;
+    
+    while(getline(ss, item, ','))
+        genres.push_back(item);
+    novo.setGenres(genres);
+
+    Movies.push_back(novo);
 }
 
 void imprimeMovie(Movie a){
@@ -129,7 +149,8 @@ void imprimeMovie(Movie a){
     cout << a.getIsAdult() << " | ";
     cout << a.getStartYear() << " | ";
     cout << a.getEndYear() << " | ";
-    cout << a.getRuntimeMinutes();
+    cout << a.getRuntimeMinutes() << " | ";
+    a.getGenres();
     cout << endl;
 }
 
@@ -236,6 +257,35 @@ void selectionSort(vector<Cinema>& c){
     }
 }
 
+void merge(vector<Movie>& m, int left, int mid, int right){
+    vector<Movie> aux(right-left+1);
+    for(int i = left, k=0; i <= right; ++i, ++k)
+        aux[k] = m[i];
+    
+    int i = 0, j = mid-left+1, k = left;
+
+    while(i <= mid-left && j <= right-left){
+        if(aux[i].getTconst() <= aux[j].getTconst())
+            m[k++] = aux[i++];
+        else
+            m[k++] = aux[j++];
+    }
+
+    while(i <= mid-left)
+        m[k++] = aux[i++];
+}
+
+void mergeSort(vector<Movie>& m, int left, int right){
+    if(left >= right)
+        return;
+    
+    int mid = (left+right)/2;
+
+    mergeSort(m, left, mid);
+    mergeSort(m, mid+1, right);
+    merge(m, left, mid, right);
+}
+
 void searchByType(vector<Movie> M, string value){
     for(int i = 0; i < M.size(); i++)
         if(M[i].getTitleType() == value){
@@ -288,7 +338,7 @@ int main(){
 
     vector <Movie> M;
 
-    Movie tituloM("tconst", "titleType", "primaryTitle", "originalTitle", "isAdult", "startYear", "endYear", "runtimeMinutes");
+    //Movie tituloM("tconst", "titleType", "primaryTitle", "originalTitle", "isAdult", "startYear", "endYear", "runtimeMinutes"/*, "genres"*/);
 
     //M.push_back(tituloM);
     C.push_back(titulo);   
@@ -321,8 +371,16 @@ int main(){
         }
     }
 
-    for(int i = 0; i < C.size(); i++)
-        imprimeCinema(C[i]);
+    for(int i=0; i < M.size(); i++)
+        imprimeMovie(M[i]);
+
+    //for(int i = 0; i < C.size(); i++)
+      //  imprimeCinema(C[i]);
+
+    //mergeSort(C,0,C.size()-1);
+
+    //for(int i = 0; i < C.size(); i++)
+      //  imprimeCinema(C[i]);
 
     /*for(int i = 0; i < M.size(); i++){
         cout << M[i].getTitleType();

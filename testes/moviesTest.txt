@@ -1,14 +1,9 @@
-tt7917518	short	The Battle II	The Battle II	0	2008	\N	\N
-tt7917520	tvEpisode	Miguel jura amor eterno a Nevis, pero la vida les pondrá pruebas muy duras	Miguel jura amor eterno a Nevis, pero la vida les pondrá pruebas muy duras	0	2017	\N	\N
-tt7917522	tvEpisode	El amor de Miguel y Nevis es más fuerte que quienes desean separarlos	El amor de Miguel y Nevis es más fuerte que quienes desean separarlos	0	2017	\N	\N
-tt7917526	short	The Pretentious French Film	The Pretentious French Film	0	2017	\N	3
-tt7917528	tvEpisode	Una noticia inesperada podría cambiar los planes de Miguel y Nevis	Una noticia inesperada podría cambiar los planes de Miguel y Nevis	0	2017	\N	\N
-tt7917530	video	Aftermath	Aftermath	0	2016	\N	5
-tt7917532	short	Ironheart	Ironheart	0	2018	\N	12
-tt7917534	tvEpisode	Episode #2.7	Episode #2.7	0	2017	\N	\N
-tt7917536	tvEpisode	Qué bendición, en el vientre de Nevis crece el fruto de su amor con Miguel	Qué bendición, en el vientre de Nevis crece el fruto de su amor con Miguel	0	2017	\N	\N
-tt7917538	tvEpisode	Nace Kaleth Morales mientras Miguel se define entre cantante o cocinero	Nace Kaleth Morales mientras Miguel se define entre cantante o cocinero	0	2017	\N	\N
-tt7917540	tvEpisode	Episode #2.8	Episode #2.8	0	2017	\N	\N
-tt7917726	tvMiniSeries	Stanisberg	Stanisberg	0	2017	2018	\N	Comedy
-tt7917778	tvEpisode	Episode #24.101	Episode #24.101	0	1985	1989	\N	Comedy,Talk-Show
-tt7917780	tvEpisode	Episode #24.102	Episode #24.102	0	1985	1987	\N	Comedy,Talk-Show
+tt7917564	tvEpisode	La vida estudiantil no es nada fácil y Kaleth encuentra sus primeros obstáculos	La vida estudiantil no es nada fácil y Kaleth encuentra sus primeros obstáculos	0	2017	\N	\N	Drama
+tt7917566	tvEpisode	Miguel Morales recibe una aterradora profecía sobre la música y su familia	Miguel Morales recibe una aterradora profecía sobre la música y su familia	0	2017	\N	\N	Drama
+tt7917570	tvEpisode	Nor Gloom of Night	Nor Gloom of Night	0	1952	\N	\N	Drama
+tt7917572	movie	Daasi Ya Maa	Daasi Ya Maa	0	1946	\N	\N	\N
+tt7917574	tvSeries	Comedy Nights Live	Comedy Nights Live	0	2016	2016	\N	Comedy
+tt7917578	tvEpisode	Episode #1.2	Episode #1.2	0	2017	\N	\N	Drama
+tt7917580	short	Heather Has Four Moms	Heather Has Four Moms	0	2018	\N	14	Comedy,Drama,Short
+tt7917582	short	Girlhood	Girlhood	0	2017	\N	16	Biography,Documentary,Short
+tt7917584	short	A traves de la dama	A traves de la dama	0	2016	\N	41	Documentary,Short
