@@ -189,9 +189,6 @@ class Cinema{
         }
  
         vector<string> getMovies(){
-            for(int i=0; i<this->movies.size(); i++)
-                cout << this->movies[i] << " ";
-            cout << endl;
             return movies;
         }
 };
@@ -265,20 +262,13 @@ void insertCinema(vector<string> coluna, vector<Cinema>& Cinemas){
 void showMoviesName(Cinema c, vector<Movie>& m){
     mergeSort(m, 0, m.size()-1);
     vector<string> tconst = c.getMovies();
-    
-    //if(tconst[0] == "Filmes_em_Exibição")
-        //return;
-    cout << m[0].getTconst();
-
-    for(int i=1; i < tconst.size(); i++){
+    for(int i=0; i < tconst.size(); i++){
         int indice = binarySearch(m,tconst[i]);
-        cout << tconst[i] << "  ";
-        cout << m[i].getPrimaryTitle() << endl;
+        if(indice != -1)
+            cout << tconst[i] << " -> " << m[indice].getPrimaryTitle() << endl;
     }
     cout << endl;    
 }
-
-
 
 void imprimeCinema(Cinema a, vector<Movie>& m){
     cout << endl;
@@ -287,6 +277,10 @@ void imprimeCinema(Cinema a, vector<Movie>& m){
     cout << a.getXCoordinate() << " ";
     cout << a.getYCoordinate() << " ";
     cout << a.getTicketPrice() << " ";
+    vector<string> movies = a.getMovies();
+    for(int i=0; i < movies.size(); i++)
+        cout << movies[i] << " ";
+    cout << endl;
     showMoviesName(a,m);
 }
 
@@ -339,10 +333,10 @@ void searchByRangeYears(vector<Movie> M, int startValue, int endValue){
 
 
 int main(){
-    //ifstream arquivoCinema("../Database/cinemas.txt");
-    //ifstream arquivoMovies("../Database/movies.txt");
-    ifstream arquivoCinema("cinemasTest.txt");
-    ifstream arquivoMovies("moviesTest.txt");
+    ifstream arquivoCinema("../Database/cinemas.txt");
+    ifstream arquivoMovies("../Database/movies.txt");
+    //ifstream arquivoCinema("cinemasTest.txt");
+    //ifstream arquivoMovies("moviesTest.txt");
     vector <Cinema> C;
 
     Cinema titulo;

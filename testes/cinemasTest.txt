@@ -1,2 +1,2 @@
 Cinema_ID, Nome_do_Cinema, Coordenada_X, Coordenada_Y, Preço_Ingresso, Filmes_Em_Exibição
-cc00325, CineVogue Opulence, 987654, 234567, 7.25, tt8155550, tt8155650, tt8155750, tt8155850, tt8155950, tt8156050, tt8156150
+cc00325, CineVogue Opulence, 987654, 234567, 7.25, tt8155556, tt8155650, tt8155750, tt8155850, tt8155950, tt8156050, tt8156150
