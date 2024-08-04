@@ -182,8 +182,10 @@ class Cinema{
         }
 
         void setMovies(vector<string> movies){
-            for(int i=0; i<movies.size(); i++)
+            for(int i=0; i<movies.size(); i++){
+                movies[i].erase(movies[i].begin());
                 this->movies.push_back(movies[i]);
+            }
         }
  
         vector<string> getMovies(){
@@ -260,15 +262,32 @@ void insertCinema(vector<string> coluna, vector<Cinema>& Cinemas){
     Cinemas.push_back(novo);
 }
 
+void showMoviesName(Cinema c, vector<Movie>& m){
+    mergeSort(m, 0, m.size()-1);
+    vector<string> tconst = c.getMovies();
+    
+    //if(tconst[0] == "Filmes_em_Exibição")
+        //return;
+    cout << m[0].getTconst();
 
-void imprimeCinema(Cinema a, vector<Movie> m){
+    for(int i=1; i < tconst.size(); i++){
+        int indice = binarySearch(m,tconst[i]);
+        cout << tconst[i] << "  ";
+        cout << m[i].getPrimaryTitle() << endl;
+    }
+    cout << endl;    
+}
+
+
+
+void imprimeCinema(Cinema a, vector<Movie>& m){
     cout << endl;
     cout << a.getCinemaID() << " ";
     cout << a.getName() << " ";
     cout << a.getXCoordinate() << " ";
     cout << a.getYCoordinate() << " ";
     cout << a.getTicketPrice() << " ";
-    
+    showMoviesName(a,m);
 }
 
 void selectionSort(vector<Cinema>& c){
@@ -381,7 +400,7 @@ int main(){
         imprimeCinema(C[i], M);
 
 
-    mergeSort(M,0,M.size()-1);
+    //mergeSort(M,0,M.size()-1);
 //    cout << "IMPRIME ORDENADO POR TITULO DAQUI PRA BAIXO" << endl;
 
     //for(int i=0; i < M.size(); i++)
