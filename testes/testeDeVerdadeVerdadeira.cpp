@@ -195,7 +195,7 @@ class Cinema{
 
 void insertCinema(vector<string> coluna, vector<Cinema>& Cinemas){
     Cinema novo;
-
+    //cout << "entrou";
     novo.setCinemaID(coluna[0]);
     novo.setName(coluna[1]);
     novo.setXCoordinate(coluna[2]);
@@ -207,6 +207,7 @@ void insertCinema(vector<string> coluna, vector<Cinema>& Cinemas){
         movies.push_back(coluna[contador++]);
     novo.setMovies(movies);
     Cinemas.push_back(novo);
+    //cout << "entrou 222222";
 }
 
 
@@ -243,7 +244,7 @@ void merge(vector<Movie>& m, int left, int mid, int right){
     int i = 0, j = mid-left+1, k = left;
 
     while(i <= mid-left && j <= right-left){
-        if(aux[i].getPrimaryTitle() <= aux[j].getPrimaryTitle())
+        if(aux[i].getTconst() <= aux[j].getTconst())
             m[k++] = aux[i++];
         else
             m[k++] = aux[j++];
@@ -262,6 +263,22 @@ void mergeSort(vector<Movie>& m, int left, int right){
     mergeSort(m, left, mid);
     mergeSort(m, mid+1, right);
     merge(m, left, mid, right);
+}
+
+int binarySearch(vector<Movie> m, string elemento){
+    int inicio = 0;
+    int fim = m.size() - 1;
+
+    while(inicio <= fim){
+        int meio = inicio + (fim-inicio) / 2;
+        if(m[meio].getTconst() == elemento)
+            return meio;
+        else if(m[meio].getTconst() < elemento)
+            inicio = meio+1;
+        else
+            fim = meio-1;
+    }
+    return -1;
 }
 
 void searchByType(vector<Movie> M, string value){
@@ -293,11 +310,11 @@ void searchByRangeYears(vector<Movie> M, int startValue, int endValue){
     }
 }
 
+
+
 int main(){
     ifstream arquivoCinema("../Database/cinemas.txt");
     ifstream arquivoMovies("../Database/movies.txt");
-
-    
 
     vector <Cinema> C;
 
@@ -328,7 +345,6 @@ int main(){
     if(arquivoCinema.is_open() && arquivoMovies.is_open()){
         while(getline(arquivoCinema, linha)){
             linhaCinema.erase(linhaCinema.begin(), linhaCinema.end());
-
             stringstream ss(linha);
             string item;
             while(getline(ss, item, ',')){
@@ -338,7 +354,6 @@ int main(){
         }
         while(getline(arquivoMovies, linha)){
             linhaMovies.erase(linhaMovies.begin(), linhaMovies.end());
-
             stringstream ss(linha);
             string item;
             while(getline(ss, item, '\t')){
@@ -348,18 +363,22 @@ int main(){
         }
     }
 
-    for(int i=0; i < M.size(); i++)
-        imprimeMovie(M[i]);
+    //for(int i=0; i < M.size(); i++)
+        //imprimeMovie(M[i]);
 
     //for(int i = 0; i < C.size(); i++)
       //  imprimeCinema(C[i]);
 
     mergeSort(M,0,M.size()-1);
 
-    cout << "IMPRIME ORDENADO POR TITULO DAQUI PRA BAIXO" << endl;
+    int indice = binarySearch(M, "tt8002900");
 
-    for(int i=0; i < M.size(); i++)
-        imprimeMovie(M[i]);
+    imprimeMovie(M[indice]);
+
+    //cout << "IMPRIME ORDENADO POR TITULO DAQUI PRA BAIXO" << endl;
+
+    //for(int i=0; i < M.size(); i++)
+        //imprimeMovie(M[i]);
 
     //for(int i = 0; i < C.size(); i++)
         //imprimeCinema(C[i]);
