@@ -229,7 +229,9 @@ int binarySearch(vector<Movie>& m, string elemento){
 
     while(inicio <= fim){
         int meio = inicio + (fim-inicio) / 2;
-        //cout << "1" << m[meio].getTconst() << " 1" << elemento;
+
+        if(meio == 0)
+            break;
         if(m[meio].getTconst() == elemento){
             return meio;
 
@@ -239,7 +241,6 @@ int binarySearch(vector<Movie>& m, string elemento){
         else
             fim = meio-1;
 
-        cout << m[meio].getPrimaryTitle() << "tst" << endl;
     }   
     return -1;
 }
@@ -259,20 +260,6 @@ void insertCinema(vector<string> coluna, vector<Cinema>& Cinemas){
     Cinemas.push_back(novo);
 }
 
-void showMoviesName(vector<string> tconst, vector<Movie> m){
-    //mergeSort(m, 0, m.size()-1);
-    cout << "a1";
-    if(tconst[0] == "Filmes_em_Exibição")
-        return;
-    cout << "a2";
-    for(int i=0; i < tconst.size(); i++){
-        int indice = binarySearch(m,tconst[i]);
-        //cout << tconst[i] <<" -> " << m[indice].getPrimaryTitle() << endl;
-    }
-    cout << endl;    
-}
-
-
 
 void imprimeCinema(Cinema a, vector<Movie> m){
     cout << endl;
@@ -281,18 +268,7 @@ void imprimeCinema(Cinema a, vector<Movie> m){
     cout << a.getXCoordinate() << " ";
     cout << a.getYCoordinate() << " ";
     cout << a.getTicketPrice() << " ";
-    vector<string> tconst = a.getMovies();
-    for(int i=0; i<tconst.size(); i++)
-        cout << endl << tconst[i];
-    cout << endl;
-    for(int i=0; i < tconst.size(); i++){
-        int indice = binarySearch(m, tconst[i]);
-        cout << indice;
-        //out << tconst[i] << "->" << m[indice].getPrimaryTitle() << endl;
-    }
-    //cout << tconst.size() << "gfdfd";
-    //showMoviesName(tconst,m);
-    //cout << "aaaaa";
+    
 }
 
 void selectionSort(vector<Cinema>& c){
@@ -344,12 +320,10 @@ void searchByRangeYears(vector<Movie> M, int startValue, int endValue){
 
 
 int main(){
-    ifstream arquivoCinema("../Database/cinemas.txt");
+    //ifstream arquivoCinema("../Database/cinemas.txt");
     //ifstream arquivoMovies("../Database/movies.txt");
-
-    //ifstream arquivoCinema("cinemasTest.txt");
+    ifstream arquivoCinema("cinemasTest.txt");
     ifstream arquivoMovies("moviesTest.txt");
-
     vector <Cinema> C;
 
     Cinema titulo;
@@ -376,6 +350,7 @@ int main(){
     
     string linha;
 
+
     if(arquivoCinema.is_open() && arquivoMovies.is_open()){
         while(getline(arquivoCinema, linha)){
             linhaCinema.erase(linhaCinema.begin(), linhaCinema.end());
@@ -397,26 +372,27 @@ int main(){
         }
     }
 
+
     //cout << "main";
     //for(int i=0; i < M.size(); i++)
         //imprimeMovie(M[i]);
 
-    imprimeMovie(M[234]);
-    cout << M[234].getPrimaryTitle();
+    for(int i = 0; i < C.size(); i++)
+        imprimeCinema(C[i], M);
 
-    //for(int i = 0; i < C.size(); i++)
-        //imprimeCinema(C[i], M);
 
     mergeSort(M,0,M.size()-1);
-
-    int indice = binarySearch(M, "tt8002900");
-
-    imprimeMovie(M[indice]);
-
-    //cout << "IMPRIME ORDENADO POR TITULO DAQUI PRA BAIXO" << endl;
+//    cout << "IMPRIME ORDENADO POR TITULO DAQUI PRA BAIXO" << endl;
 
     //for(int i=0; i < M.size(); i++)
-        //imprimeMovie(M[i]);
+       // imprimeMovie(M[i]);
+    
+    //int indice = binarySearch(M, "tt8156150");
+    //cout << indice;
+
+    //imprimeMovie(M[indice]);
+
+
 
     //for(int i = 0; i < C.size(); i++)
         //imprimeCinema(C[i]);
