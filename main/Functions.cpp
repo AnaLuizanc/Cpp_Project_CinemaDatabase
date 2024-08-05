@@ -144,18 +144,17 @@ void searchByTitleType(vector<Movie> M, string value){
 
 //Realiza a busca por duração do filme.
 
-void searchByRuntimeMinutes(vector<Movie> M, int startValue, int endValue){
-    for(int i=0; i < M.size(); i++){
-        //int runtime = stoi(M[i].getRuntimeMinutes());
-        //if(runtime >= startValue && runtime <= endValue)
-            //imprimeMovie(M[i]);
+void searchByRuntimeMinutes(vector<Movie> M, string startValue, string endValue){
+    for(int i=1; i < M.size(); i++){
+        if(M[i].getRuntimeMinutes() >= startValue && M[i].getRuntimeMinutes() <= endValue)
+            imprimeMovie(M[i]);
     }
 }
 
 //Realiza a busca por ano do filme.
 
 void searchByYear(vector<Movie> M, string value){
-    for(int i=0; i < M.size(); i++){
+    for(int i=1; i < M.size(); i++){
         if(M[i].getStartYear() == value || M[i].getEndYear() == value)
             imprimeMovie(M[i]);
     }
@@ -163,18 +162,10 @@ void searchByYear(vector<Movie> M, string value){
 
 //Realiza a busca de filmes num determinado escopo de anos.
 
-void searchByRangeYears(vector<Movie> M, int startValue, int endValue){
-    cout << "aaaaaa";
+void searchByRangeYears(vector<Movie> M, string startValue, string endValue){
     for(int i=1; i < M.size(); i++){
-        int startYear = stoi(M[i].getStartYear());
-        string s = "\\N";
-        if(M[i].getEndYear() == s)
-            continue;
-        else{
-            int endYear = stoi(M[i].getEndYear());
-            if(startValue >= startYear && endYear <= endValue)
-                imprimeMovie(M[i]);
-        }
+        if(M[i].getStartYear() >= startValue && M[i].getEndYear() <= endValue)
+            imprimeMovie(M[i]);
     }
 }
 
