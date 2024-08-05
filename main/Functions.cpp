@@ -124,7 +124,9 @@ void imprimeMovie(Movie a){
     cout << a.getStartYear() << " | ";
     cout << a.getEndYear() << " | ";
     cout << a.getRuntimeMinutes() << " | ";
-    a.getGenres();
+    vector<string> genres = a.getGenres();
+    for(int i = 0; i < genres.size(); i++)
+        cout << genres[i] << " ";
     cout << endl;
 }
 
