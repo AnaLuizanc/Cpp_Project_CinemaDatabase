@@ -226,22 +226,30 @@ int binarySearch(vector<Movie>& m, string elemento){
     int inicio = 0;
     int fim = m.size() - 1;
 
+    int anterior;
+
     while(inicio <= fim){
         int meio = inicio + (fim-inicio) / 2;
-
         if(meio == 0)
             break;
         if(m[meio].getTconst() == elemento){
             return meio;
 
         }
-        else if(m[meio].getTconst() < elemento)
+        else if(m[meio].getTconst() < elemento){
             inicio = meio+1;
-        else
+            anterior = meio;
+        }
+        else{
             fim = meio-1;
-
+            anterior = meio;
+        }
     }   
-    return -1;
+
+    if(m[anterior].getTconst() < elemento)
+        return anterior + 1;
+    else
+        return anterior;
 }
 
 void insertCinema(vector<string> coluna, vector<Cinema>& Cinemas){
@@ -404,6 +412,8 @@ int main(){
     //cout << indice;
 
     //imprimeMovie(M[indice]);
+
+
 
 
 
