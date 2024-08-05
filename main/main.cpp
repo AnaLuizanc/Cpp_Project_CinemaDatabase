@@ -3,10 +3,10 @@
 #include <vector>
 #include <string>
 
+using namespace std;
+
 #include "./headers/Cinema.hpp"
 #include "Functions.cpp"
-
-using namespace std;
 
 int main(){
     ifstream arquivoCinema("../Database/cinemas.txt");
@@ -50,6 +50,17 @@ int main(){
         }
     }
 
-    for(int i = 0; i < C.size(); i++)
-        imprimeCinema(C[i], M);
+    //for(int i = 0; i < C.size(); i++)
+        //imprimeCinema(C[i], M);
+
+    //teste searchByYear OK
+    //searchByYear(M, "1990");
+
+    //teste searchByRangeYears
+    //searchByRangeYears(M, 1990, 2000);
+
+    //teste searchByRuntimeMinutes
+    //searchByRuntimeMinutes(M,5,10);
+
+    return 0;
 }

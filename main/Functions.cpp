@@ -1,9 +1,12 @@
 #include "./headers/Movie.hpp"
 #include "./headers/Cinema.hpp"
 
+#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
+
+using namespace std;
 
 //Realiza Selection Sort do vetor Cinema.
 
@@ -143,9 +146,9 @@ void searchByTitleType(vector<Movie> M, string value){
 
 void searchByRuntimeMinutes(vector<Movie> M, int startValue, int endValue){
     for(int i=0; i < M.size(); i++){
-        int runtime = stoi(M[i].getRuntimeMinutes());
-        if(runtime >= startValue && runtime <= endValue)
-            imprimeMovie(M[i]);
+        //int runtime = stoi(M[i].getRuntimeMinutes());
+        //if(runtime >= startValue && runtime <= endValue)
+            //imprimeMovie(M[i]);
     }
 }
 
@@ -161,6 +164,7 @@ void searchByYear(vector<Movie> M, string value){
 //Realiza a busca de filmes num determinado escopo de anos.
 
 void searchByRangeYears(vector<Movie> M, int startValue, int endValue){
+    cout << "aaaaaa";
     for(int i=1; i < M.size(); i++){
         int startYear = stoi(M[i].getStartYear());
         string s = "\\N";
