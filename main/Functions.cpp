@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <sstream>
+#include <string>
 
 //Realiza Selection Sort do vetor Cinema.
 
@@ -129,15 +130,24 @@ void imprimeMovie(Movie a){
 
 //Realiza a busca por tipo de filme.
 
-void searchByType(vector<Movie> M, string value){
+void searchByTitleType(vector<Movie> M, string value){
     for(int i = 0; i < M.size(); i++)
         if(M[i].getTitleType() == value){
             imprimeMovie(M[i]);
         }
 }
 
-//Realiza a busca por ano do filme.
+//Realiza a busca por duração do filme.
 
+void searchByRuntimeMinutes(vector<Movie> M, int startValue, int endValue){
+    for(int i=0; i < M.size(); i++){
+        int runtime = stoi(M[i].getRuntimeMinutes());
+        if(runtime >= startValue && runtime <= endValue)
+            imprimeMovie(M[i]);
+    }
+}
+
+//Realiza a busca por ano do filme.
 
 void searchByYear(vector<Movie> M, string value){
     for(int i=0; i < M.size(); i++){
@@ -195,7 +205,6 @@ void showMoviesName(Cinema c, vector<Movie>& m){
 //Imprime os dados de um determinado cinema.
 
 void imprimeCinema(Cinema a, vector<Movie>& m){
-    cout << endl;
     cout << a.getCinemaID() << " ";
     cout << a.getName() << " ";
     cout << a.getXCoordinate() << " ";
