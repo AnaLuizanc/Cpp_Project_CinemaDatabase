@@ -1,15 +1,20 @@
+#pragma once
+#include <iostream>
+
 #include "Movie.hpp"
-using namespace std;
+
+//using namespace std;
 
 class Cinema{
+    public:
     string cinemaID;
     string name;
-    int xCoordinate;
-    int yCoordinate;
-    double ticketPrice;
-    vector<Movie> movies;
+    string xCoordinate;
+    string yCoordinate;
+    string ticketPrice;
+    vector<string> movies;
 
-    public:
+
         void setCinemaID(string cinemaID){
             this->cinemaID = cinemaID;
         }
@@ -26,37 +31,40 @@ class Cinema{
             return name;
         }
 
-        void setXCoordinate(int xCoordinate){
+        void setXCoordinate(string xCoordinate){
             this->xCoordinate = xCoordinate;
         }
 
-        int getXCoordinate(){
+        string getXCoordinate(){
             return xCoordinate;
         }
 
-        void setYCoordinate(int yCoordinate){
+        void setYCoordinate(string yCoordinate){
             this->yCoordinate = yCoordinate;
         }
 
-        int setYCoordinate(){
+        string getYCoordinate(){
             return yCoordinate;
         }
 
-        void setTicketPrice(double ticketPrice){
+        void setTicketPrice(string ticketPrice){
             this->ticketPrice = ticketPrice;
         }
 
-        double getTicketPrice(){
+        string getTicketPrice(){
             return ticketPrice;
         }
 
-        void setMovies(vector<Movie> movies){
-            for (int i = 0; i < movies.size(); i++){
-                this->movies.push_back(movies.at(i));
+        void setMovies(vector<string> movies){
+            for(int i=0; i<movies.size(); i++){
+                movies[i].erase(movies[i].begin());
+                this->movies.push_back(movies[i]);
             }
         }
-
-        vector<Movie> getMovies(){
+ 
+        vector<string> getMovies(){
             return movies;
         }
+
 };
+

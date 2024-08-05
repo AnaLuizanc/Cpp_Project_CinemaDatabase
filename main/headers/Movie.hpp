@@ -1,7 +1,8 @@
 
+#pragma once
 #include <string>
 #include <vector>
-#include <array>
+#include <iostream>
 
 using namespace std;
 
@@ -10,27 +11,14 @@ class Movie{
     string titleType;
     string primaryTitle;
     string originalTitle;
-    bool isAdult;
-    int startYear;
-    int endYear;
-    int runtimeMinutes;
+    string isAdult;
+    string startYear;
+    string endYear;
+    string runtimeMinutes;
     vector<string> genres;
 
+    public:
 
-public:
-        Movie(string tconst, string titleType, string primaryTitle, string originalTitle, bool isAdult, int startYear, int endYear, int runtimeMinutes, vector<string> genres){
-            this->tconst = tconst;
-            this->titleType = titleType;
-            this->primaryTitle = primaryTitle;
-            this->originalTitle = originalTitle;
-            this->isAdult = isAdult;
-            this->endYear = endYear;
-            this->startYear = startYear;
-            this->runtimeMinutes = runtimeMinutes;
-            for (int i = 0; i < genres.size(); i++)
-                this->genres.push_back(genres[i]);
-        }
-        
         void setTconst(string tconst){
             this->tconst = tconst;
         }
@@ -63,46 +51,46 @@ public:
             return originalTitle;
         }
 
-        void setIsAdult(bool isAdult){
+        void setIsAdult(string isAdult){
             this->isAdult = isAdult;
         }
 
-        bool getIsAdult(){
+        string getIsAdult(){
             return isAdult;
         }
 
-        void setStartYear(int startYear){
+        void setStartYear(string startYear){
             this->startYear = startYear;
         }
 
-        int getStartYear(){
+        string getStartYear(){
             return startYear;
         }
 
-        void setEndYear(int endYear){
+        void setEndYear(string endYear){
             this->endYear = endYear;
         }
 
-        int getEndYear(){
+        string getEndYear(){
             return endYear;
         }
 
-        void setRuntimeMinutes(int runtimeMinutes){
+        void setRuntimeMinutes(string runtimeMinutes){
             this->runtimeMinutes = runtimeMinutes;
         }   
 
-        int getRuntimeMinutes(){
+        string getRuntimeMinutes(){
             return runtimeMinutes;
         }
 
         void setGenres(vector<string> genres){
-            for (int i = 0; i < genres.size(); i++){
-                this->genres.push_back(genres.at(i));
-            }
+            for(int i=0; i < genres.size(); i++)
+                this->genres.push_back(genres[i]);
         }
 
-        vector<string> getGenres(){
+        vector<string>getGenres(){
             return genres;
         }
+
 
 };
