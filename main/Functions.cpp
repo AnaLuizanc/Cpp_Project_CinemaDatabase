@@ -136,9 +136,19 @@ void imprimeMovie(Movie a){
 //Realiza a busca por tipo de filme.
 
 void searchByTitleType(vector<Movie> M, string value){
+    string linha = value;
+    stringstream ss(linha);
+    string item;
+    vector<string> titleType;
+    
+    while(getline(ss, item, ','))
+        titleType.push_back(item);
+
     for(int i = 1; i < M.size(); i++){
-        if(M[i].getTitleType() == value)
-            imprimeMovie(M[i]);
+        for(int j = 0; j<titleType.size(); j++){
+            if(M[i].getTitleType() == titleType[j])
+                imprimeMovie(M[i]);
+        }
     }
 }
 

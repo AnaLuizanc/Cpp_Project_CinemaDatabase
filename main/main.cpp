@@ -65,6 +65,8 @@ int main(){
     //teste searchByRuntimeMinutes OK
     //searchByRuntimeMinutes(M,3,10);
 
+    //teste searchByTitleType OK
+    //searchByTitleType(M, "video,short");
 
     return 0;
 }
