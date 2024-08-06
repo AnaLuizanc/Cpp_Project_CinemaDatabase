@@ -24,6 +24,7 @@ class Cinema{
         }
 
         void setName(string name){
+            name.erase(name.begin());
             this->name = name;
         }
 
@@ -32,6 +33,7 @@ class Cinema{
         }
 
         void setXCoordinate(string xCoordinate){
+            xCoordinate.erase(xCoordinate.begin());
             this->xCoordinate = xCoordinate;
         }
 
@@ -40,6 +42,7 @@ class Cinema{
         }
 
         void setYCoordinate(string yCoordinate){
+            yCoordinate.erase(yCoordinate.begin());
             this->yCoordinate = yCoordinate;
         }
 
@@ -48,6 +51,7 @@ class Cinema{
         }
 
         void setTicketPrice(string ticketPrice){
+            ticketPrice.erase(ticketPrice.begin());
             this->ticketPrice = ticketPrice;
         }
 

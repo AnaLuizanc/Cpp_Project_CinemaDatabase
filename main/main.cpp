@@ -56,11 +56,12 @@ int main(){
     //teste searchByYear OK
     //searchByYear(M, "1990");
 
-    //teste searchByRangeYears
-    //searchByRangeYears(M, 1990, 2000);
+    //teste searchByRangeYears OK
+    searchByRangeYears(M, 1990, 2000);
 
-    //teste searchByRuntimeMinutes
-    //searchByRuntimeMinutes(M,5,10);
+    //teste searchByRuntimeMinutes OK
+    //searchByRuntimeMinutes(M,3,10);
+
 
     return 0;
 }
