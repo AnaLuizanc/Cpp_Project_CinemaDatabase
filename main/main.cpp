@@ -56,8 +56,11 @@ int main(){
     //teste searchByYear OK
     //searchByYear(M, "1990");
 
+    //teste searchByIsAdult OK
+    //searchByIsAdult(M, "1");
+
     //teste searchByRangeYears OK
-    searchByRangeYears(M, 1990, 2000);
+    //searchByRangeYears(M, 1990, 2000);
 
     //teste searchByRuntimeMinutes OK
     //searchByRuntimeMinutes(M,3,10);

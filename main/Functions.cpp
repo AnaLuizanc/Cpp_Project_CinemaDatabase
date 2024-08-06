@@ -142,6 +142,15 @@ void searchByTitleType(vector<Movie> M, string value){
     }
 }
 
+//Realiza a busca de filmes adultos ou não.
+
+void searchByIsAdult(vector<Movie> M, string isAdult){
+    for(int i = 1; i < M.size(); i++){
+        if(isAdult == M[i].getIsAdult())
+            imprimeMovie(M[i]);
+    }
+}
+
 //Realiza a busca por duração do filme.
 
 void searchByRuntimeMinutes(vector<Movie> M, int startValue, int endValue){
