@@ -68,5 +68,9 @@ int main(){
     //teste searchByTitleType OK
     //searchByTitleType(M, "video,short");
 
+    searchByGenres(M, "Animation,Drama,Music");
+
+    //imprimeMovie(M[6]);
+
     return 0;
 }
