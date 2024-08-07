@@ -263,6 +263,29 @@ void imprimeCinema(Cinema a, vector<Movie>& m){
     for(int i=0; i < movies.size(); i++)
         cout << movies[i] << " ";
     cout << endl;
-    showMoviesName(a,m);
+    //showMoviesName(a,m);
 }
 
+//Realiza busca de cinemas que possuem filmes do(s) tipo(s) (titleType) especificado
+
+void searchCinemaByTitleType(vector<Cinema> C, vector<Movie> M, string value){
+    string linha = value;
+    stringstream ss(linha);
+    string item;
+    vector<string> titlesType;
+
+    while(getline(ss, item, ','))
+        titlesType.push_back(item);
+
+    for(int i=1; i<C.size(); i++){
+        vector<string> tconst = C[i].getMovies();
+        for(int t = 0; t<tconst.size(); t++){
+            int index = binarySearch(M, tconst[t]);
+            for(int j = 0; j<titlesType.size(); j++){
+                if(M[index].getTitleType() == titlesType[j]){
+                    imprimeCinema(C[i],M);
+                }
+            }
+        }
+    }
+}
