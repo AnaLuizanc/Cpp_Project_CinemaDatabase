@@ -156,20 +156,25 @@ void searchByTitleType(vector<Movie> M, string value){
 //Realiza a busca de filmes pelo gênero.
 
 void searchByGenres(vector<Movie> M, string value){
+    string linha = value;
+    stringstream ss(linha);
+    string item;
+    vector<string> genres;
+    
+    while(getline(ss, item, ','))
+        genres.push_back(item);
 
-    for(int i = 1; i < M.size(); i++){
+    for(int i=1; i<M.size(); i++){
         vector<string> genresMovie = M[i].getGenres();
-        string genres;
-        genres.append(genresMovie[0]);
-        //erro aqui
-        for(int k = 1; k < genresMovie.size(); k++){
-            genres + ",";
-            genres + genresMovie[i];
+        if(genres.size() == genresMovie.size()){
+            bool equal = true;
+            for(int j=0; j<genresMovie.size(); j++){
+                if(genres[j] != genresMovie[j])
+                    equal = false;
+            }
+            if(equal)
+                imprimeMovie(M[i]);
         }
-        cout << genres << endl << endl;
-        //genres.erase(genres.size()-1);
-        if(genres == value)
-            imprimeMovie(M[i]);
     }
 }
 
