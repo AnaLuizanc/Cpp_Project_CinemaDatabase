@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-//#include <stack>
+#include <stack>
 
 using namespace std;
 
@@ -36,7 +36,7 @@ class ExpressionTree{
         }
 };
 
-class stack{
+/*class stack{
     Node* head = NULL;
 
     public:
@@ -65,7 +65,7 @@ void stack::push(Node* x){
         head = x;
     }
 
-}
+}*/
 
 
 int main(){
@@ -73,7 +73,7 @@ int main(){
 
     vector<string> keywords = {"titleType", "year", "genres"};
 
-    stack e;
+    /*stack e;
     ExpressionTree a;
 
     Node *x, *y, *z;
@@ -99,11 +99,11 @@ int main(){
 
 
 
-    a.inorder(z);
+    a.inorder(z);*/
 
 
 
-    string input = "titleType(tvEpisode,short)&year(2023)&genres(Animation&Music)";
+    string input = "titleType(tvEpisode|short)&year(2023)&genres(Animation&Music)";
     vector<string> tokens;
 
     // Iterate through the string character by character
@@ -126,11 +126,14 @@ int main(){
 
     stack<string> values;
     stack<string> keychains;
+    stack<string> keychainsInserted;
     string queryDelimited;
     for(int i = 0; i < tokens.size(); i++){
-        if(tokens[i] == ":" || tokens[i] == "(" || tokens[i] == ")" || tokens[i] == "," || tokens[i] == "&"){
+        if(tokens[i] == ":" || tokens[i] == "(" || tokens[i] == ")" || tokens[i] == "|" || tokens[i] == "&"){
             if(queryDelimited != keywords[0] && queryDelimited != keywords[1] && queryDelimited != keywords[2])
                 values.push(queryDelimited);
+            else
+                keychainsInserted.push(queryDelimited);
             
             keychains.push(tokens[i]);
             queryDelimited.clear();
@@ -167,7 +170,14 @@ int main(){
     for(int i = defined.size()-1; i >=0; i--){
         cout << defined.top() << " ";
         defined.pop();
-    }*/
+    }
+
+    cout << endl;
+
+    for(int i = keychainsInserted.size()-1; i >=0; i--){
+        cout << keychainsInserted.top() << " ";
+        keychainsInserted.pop();
+    }
 
 
 
@@ -177,3 +187,39 @@ int main(){
 
 
 }
+
+
+/*#include <iostream>
+#include <string>
+#include <stack>
+#include <vector>
+
+using namespace std;
+
+int main(){
+    string a = "TVEpisode";
+    string b = "short";
+
+    string c = "titleType";
+
+
+    string querylimited2;
+
+
+    stack<string> connectives;
+
+    connectives.push(a);
+    connectives.push(b);
+
+    for(int i = connectives.size() -1; i >= 0; i--){
+        querylimited2.append(connectives.top());
+        connectives.pop();
+        if(connectives.size() != 0)
+            querylimited2.append(",");
+    }
+
+    cout << querylimited2;
+
+
+    return 0;
+}*/
