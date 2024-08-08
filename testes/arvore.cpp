@@ -1,4 +1,7 @@
 #include <iostream>
+#include <vector>
+#include <string>
+//#include <stack>
 
 using namespace std;
 
@@ -66,7 +69,9 @@ void stack::push(Node* x){
 
 
 int main(){
-    string s = "ABCDEF||&&&";
+    string s = "AB&C&DE|&";
+
+    vector<string> keywords = {"titleType", "year", "genres"};
 
     stack e;
     ExpressionTree a;
@@ -79,8 +84,9 @@ int main(){
             x = e.pop();
             y = e.pop();
 
-            z->left = y;
+
             z->right = x;
+            z->left = y;
 
             e.push(z);
         }
@@ -94,6 +100,79 @@ int main(){
 
 
     a.inorder(z);
+
+
+
+    string input = "titleType(tvEpisode,short)&year(2023)&genres(Animation&Music)";
+    vector<string> tokens;
+
+    // Iterate through the string character by character
+    for (char c : input) {
+        // If the character is not a delimiter, append it to the current token
+        if (c != ':' && c != '(' && c != ')' && c != ',') {
+            if (tokens.empty() || tokens.back().back() != ' ') {
+                tokens.push_back("");
+            }
+            tokens.back() += c;
+        } else {
+            // If the character is a delimiter, add it as a separate token
+            tokens.push_back(string(1, c));
+        }
+    }
+
+    for (const string& token : tokens) {
+        //cout << token;
+    }
+
+    stack<string> values;
+    stack<string> keychains;
+    string queryDelimited;
+    for(int i = 0; i < tokens.size(); i++){
+        if(tokens[i] == ":" || tokens[i] == "(" || tokens[i] == ")" || tokens[i] == "," || tokens[i] == "&"){
+            if(queryDelimited != keywords[0] && queryDelimited != keywords[1] && queryDelimited != keywords[2])
+                values.push(queryDelimited);
+            
+            keychains.push(tokens[i]);
+            queryDelimited.clear();
+            
+        }
+        else
+            queryDelimited.append(tokens[i]);
+    }
+
+    for(int i = values.size()-1; i >=0; i--){
+        cout << values.top() << " ";
+        values.pop();
+    }
+
+    cout << endl;
+
+
+    stack<string> defined;
+    stack<string> final;
+
+
+    for(int i = keychains.size()-1; i >= 0; i--){
+        if(keychains.top() == "(" || keychains.top() == ")")
+            keychains.pop();
+        else{
+            defined.push(keychains.top());
+            keychains.pop();
+        }
+
+    }
+
+
+    
+    for(int i = defined.size()-1; i >=0; i--){
+        cout << defined.top() << " ";
+        defined.pop();
+    }*/
+
+
+
+
+
 
 
 
