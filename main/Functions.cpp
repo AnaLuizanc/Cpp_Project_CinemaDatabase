@@ -319,3 +319,19 @@ void searchCinemaByRangeYearsMovie(vector<Cinema> C, vector<Movie> M, int startV
         }
     }
 }
+
+//Realiza busca de cinemas que possuem filmes dentro do limite especificado.
+
+void searchCinemaByRuntimeMinutesMovie(vector<Cinema> C, vector<Movie> M, int startValue, int endValue){
+    for(int i=1; i<C.size(); i++){
+        vector<string> tconst = C[i].getMovies();
+        for(int t = 0; t<tconst.size(); t++){
+            int index = binarySearch(M, tconst[t]);
+            if(M[index].getRuntimeMinutes() != "\\N"){
+                int runtime = stoi(M[index].getRuntimeMinutes());
+                if(runtime >= startValue && runtime <= endValue)
+                    imprimeCinema(C[i],M);
+            }
+        }
+    }
+}
