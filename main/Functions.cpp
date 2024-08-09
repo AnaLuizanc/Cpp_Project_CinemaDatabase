@@ -6,6 +6,7 @@
 #include <sstream>
 #include <string>
 #include <cstring>
+#include <cmath>
 
 using namespace std;
 
@@ -354,5 +355,17 @@ void searchCinemaByGenresMovie(vector<Cinema> C, vector<Movie> M, string value){
             if(M[index].getGenres() == genres)
                 imprimeCinema(C[i],M);
         }
+    }
+}
+
+//Realiza busca de cinemas dentro da distância máxima solicitada pelo usuário.
+
+void searchByDistance(vector<Cinema> C, vector<Movie> M, double xAxis, double yAxis, double maxDistance){
+    for(int i=1; i<C.size(); i++){
+        double x = stod(C[i].getXCoordinate());
+        double y = stod(C[i].getYCoordinate());
+        double distance = sqrt(pow(x - xAxis, 2.0) + pow(y - yAxis, 2.0));
+        if(distance <= maxDistance)
+            imprimeCinema(C[i], M);
     }
 }
