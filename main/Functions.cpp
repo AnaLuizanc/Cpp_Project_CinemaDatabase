@@ -302,3 +302,20 @@ void searchCinemaByYearMovie(vector<Cinema> C, vector<Movie> M, string year){
         }
     }
 }
+
+//Realiza busca de cinemas que possuem filmes do período de anos especifcado.
+
+void searchCinemaByRangeYearsMovie(vector<Cinema> C, vector<Movie> M, int startValue, int endValue){
+    for(int i=1; i<C.size(); i++){
+        vector<string> tconst = C[i].getMovies();
+        for(int t = 0; t<tconst.size(); t++){
+            int index = binarySearch(M, tconst[t]);
+            if(M[index].getEndYear() != "\\N"){
+                int startYear = stoi(M[index].getStartYear());
+                int endYear = stoi(M[index].getEndYear());
+                if(startValue >= startYear && endValue <= endYear)
+                    imprimeCinema(C[i],M);
+            }
+        }
+    }
+}
