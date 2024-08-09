@@ -335,3 +335,24 @@ void searchCinemaByRuntimeMinutesMovie(vector<Cinema> C, vector<Movie> M, int st
         }
     }
 }
+
+//Realiza busca de cinemas que possuem filmes com o(s) gênero(s) especificado(s).
+
+void searchCinemaByGenresMovie(vector<Cinema> C, vector<Movie> M, string value){
+    string linha = value;
+    stringstream ss(linha);
+    string item;
+    vector<string> genres;
+
+    while(getline(ss, item, ','))
+        genres.push_back(item);
+
+    for(int i=1; i<C.size(); i++){
+        vector<string> tconst = C[i].getMovies();
+        for(int t = 0; t<tconst.size(); t++){
+            int index = binarySearch(M, tconst[t]);
+            if(M[index].getGenres() == genres)
+                imprimeCinema(C[i],M);
+        }
+    }
+}
