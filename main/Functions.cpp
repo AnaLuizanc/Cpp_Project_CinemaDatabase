@@ -216,7 +216,7 @@ void searchByRangeYears(vector<Movie> M, int startValue, int endValue){
         if(M[i].getEndYear() != "\\N"){
             int startYear = stoi(M[i].getStartYear());
             int endYear = stoi(M[i].getEndYear());
-            if(startValue <= startYear && endValue >= endYear)
+            if(startValue >= startYear && endValue <= endYear)
                 imprimeMovie(M[i]);
         }
     }
