@@ -289,3 +289,16 @@ void searchCinemaByTitleType(vector<Cinema> C, vector<Movie> M, string value){
         }
     }
 }
+
+//Realiza busca de cinemas que possuem filmes do ano especificado.
+
+void searchCinemaByYearMovie(vector<Cinema> C, vector<Movie> M, string year){
+    for(int i=1; i<C.size(); i++){
+        vector<string> tconst = C[i].getMovies();
+        for(int t = 0; t<tconst.size(); t++){
+            int index = binarySearch(M, tconst[t]);
+            if(M[index].getStartYear() == year || M[index].getEndYear() == year)
+                imprimeCinema(C[i],M);
+        }
+    }
+}
