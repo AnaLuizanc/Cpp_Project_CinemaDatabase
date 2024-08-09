@@ -137,10 +137,11 @@ void imprimeMovie(Movie a){
 
 //Realiza a busca por tipo de filme.
 
-void searchByTitleType(vector<Movie> M, string value){
+vector<Movie> searchByTitleType(vector<Movie> M, string value){
     string linha = value;
     stringstream ss(linha);
     string item;
+    vector<Movie> filtered;
     vector<string> titleType;
     
     while(getline(ss, item, ','))
@@ -149,9 +150,10 @@ void searchByTitleType(vector<Movie> M, string value){
     for(int i = 1; i < M.size(); i++){
         for(int j = 0; j<titleType.size(); j++){
             if(M[i].getTitleType() == titleType[j])
-                imprimeMovie(M[i]);
+                filtered.push_back(M[i]);
         }
     }
+    return filtered;
 }
 
 //Realiza a busca de filmes pelo gênero.
@@ -202,11 +204,14 @@ void searchByRuntimeMinutes(vector<Movie> M, int startValue, int endValue){
 
 //Realiza a busca por ano do filme.
 
-void searchByYear(vector<Movie> M, string value){
+vector<Movie> searchByYear(vector<Movie> M, string value){
+    vector<Movie> filtered;
     for(int i=1; i < M.size(); i++){
         if(M[i].getStartYear() == value || M[i].getEndYear() == value)
-            imprimeMovie(M[i]);
+            filtered.push_back(M[i]);
     }
+
+    return filtered;
 }
 
 //Realiza a busca de filmes num determinado escopo de anos.
