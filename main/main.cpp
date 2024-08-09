@@ -2,11 +2,48 @@
 #include <cstring>
 #include <vector>
 #include <string>
+#include <stack>
 
 using namespace std;
 
 #include "./headers/Cinema.hpp"
 #include "Functions.cpp"
+
+void filterApplier(string key, string values, vector<Movie>& m){
+    if(key == "titleType")
+        m = searchByTitleType(m, values);
+    else if(key == "year")
+        m = searchByYear(m, values);
+}
+
+vector<Movie> splitString(const string& input, vector<Movie> m){
+    stringstream ss(input);
+    string token;
+    string key;
+    string values;
+
+    vector<Movie> filtered = m;
+    
+
+    while (getline(ss, token, '(')) {
+        key = token;
+        getline(ss, token, ')');
+
+        stringstream value_ss(token);
+        string value;
+        while (getline(value_ss, value)) {
+            values = value;
+        }
+
+        filterApplier(key, values, filtered);
+        key.clear();
+        values.clear();
+        
+    }
+
+    return filtered;
+}
+
 
 int main(){
     ifstream arquivoCinema("../Database/cinemas.txt");
@@ -50,29 +87,18 @@ int main(){
         }
     }
 
-    //for(int i = 0; i < C.size(); i++)
-        //imprimeCinema(C[i], M);
+    string query;
 
-    //teste searchByYear OK
-    //searchByYear(M, "1990");
+    cout << "Insira a query: ";
+    cin >> query;
 
-    //teste searchByIsAdult OK
-    //searchByIsAdult(M, "1");
+    cout << endl;
 
-    //teste searchByRangeYears OK
-    //searchByRangeYears(M, 1990, 2000);
+    vector<Movie> newFiltered = splitString(query, M);
 
-    //teste searchByRuntimeMinutes OK
-    //searchByRuntimeMinutes(M,3,10);
+    for(int i = 0; i < newFiltered.size(); i++)
+        imprimeMovie(newFiltered[i]);
 
-    //teste searchByTitleType OK
-    //searchByTitleType(M, "video,short");
-
-    //teste searchByGenres OK
-    //searchByGenres(M, "Animation,Drama,Music");
-
-    //teste searchCinemaByTitleType OK
-    //searchCinemaByTitleType(C, M,"short,movie");
-
+   
     return 0;
 }
