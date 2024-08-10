@@ -50,7 +50,7 @@ int main(){
             insertMovie(linhaMovies, M);
         }
     }
-/*
+
     string query;
 
     cout << "Insira a query: ";
@@ -62,12 +62,8 @@ int main(){
 
     for(int i = 0; i < newFiltered.size(); i++)
         imprimeMovie(newFiltered[i]);
-*/
 
-    //searchByRangeYears(M, 2018,2020);
-    
-    //searchCinemaByRangeYearsMovie(C,M,2018,2020);
-    searchCinemaByRangeYearsMovie(C,M,"2018,2020");
+
    
     return 0;
 }

@@ -285,39 +285,43 @@ void imprimeCinema(Cinema a, vector<Movie>& m){
 
 //Realiza busca de cinemas que possuem filmes do(s) tipo(s) (titleType) especificado
 
-void searchCinemaByTitleType(vector<Cinema> C, vector<Movie> M, string value){
+vector<Cinema> searchCinemaByTitleType(vector<Cinema> C, vector<Movie> M, string value){
     vector<string> titlesType = foo(value);
-
+    vector<Cinema> filtered;
     for(int i=1; i<C.size(); i++){
         vector<string> tconst = C[i].getMovies();
         for(int t = 0; t<tconst.size(); t++){
             int index = binarySearch(M, tconst[t]);
             for(int j = 0; j<titlesType.size(); j++){
                 if(M[index].getTitleType() == titlesType[j]){
-                    imprimeCinema(C[i],M);
+                    filtered.push_back(C[i]);
                 }
             }
         }
     }
+    return filtered;
 }
 
 //Realiza busca de cinemas que possuem filmes do ano especificado.
 
-void searchCinemaByYearMovie(vector<Cinema> C, vector<Movie> M, string year){
+vector<Cinema> searchCinemaByYearMovie(vector<Cinema> C, vector<Movie> M, string year){
+    vector<Cinema> filtered;
     for(int i=1; i<C.size(); i++){
-        vector<string> tconst = C[i].getMovies();
+        vector<string> tconst = C[i].getMovies();  
         for(int t = 0; t<tconst.size(); t++){
             int index = binarySearch(M, tconst[t]);
             if(M[index].getStartYear() == year || M[index].getEndYear() == year)
-                imprimeCinema(C[i],M);
+                filtered.push_back(C[i]);
         }
     }
+    return filtered;
 }
 
 //Realiza busca de cinemas que possuem filmes do período de anos especifcado.
 
-void searchCinemaByRangeYearsMovie(vector<Cinema> C, vector<Movie> M, string value){
+vector<Cinema> searchCinemaByRangeYearsMovie(vector<Cinema> C, vector<Movie> M, string value){
     vector<string> values = foo(value);
+    vector<Cinema> filtered;
     int startValue = stoi(values[0]);
     int endValue = stoi(values[1]);
     for(int i=1; i<C.size(); i++){
@@ -327,18 +331,18 @@ void searchCinemaByRangeYearsMovie(vector<Cinema> C, vector<Movie> M, string val
             if(M[index].getEndYear() != "\\N"){
                 int startYear = stoi(M[index].getStartYear());
                 int endYear = stoi(M[index].getEndYear());
-                if(startValue <= startYear && endValue >= endYear){
-                        imprimeCinema(C[i],M);
-                        imprimeMovie(M[index]);
-                }
+                if(startValue <= startYear && endValue >= endYear)
+                    filtered.push_back(C[i]);
             }
         }
     }
+    return filtered;
 }
 
 //Realiza busca de cinemas que possuem filmes dentro do limite especificado.
 
-void searchCinemaByRuntimeMinutesMovie(vector<Cinema> C, vector<Movie> M, int startValue, int endValue){
+vector<Cinema> searchCinemaByRuntimeMinutesMovie(vector<Cinema> C, vector<Movie> M, int startValue, int endValue){
+    vector<Cinema> filtered;
     for(int i=1; i<C.size(); i++){
         vector<string> tconst = C[i].getMovies();
         for(int t = 0; t<tconst.size(); t++){
@@ -346,37 +350,41 @@ void searchCinemaByRuntimeMinutesMovie(vector<Cinema> C, vector<Movie> M, int st
             if(M[index].getRuntimeMinutes() != "\\N"){
                 int runtime = stoi(M[index].getRuntimeMinutes());
                 if(runtime >= startValue && runtime <= endValue)
-                    imprimeCinema(C[i],M);
+                    filtered.push_back(C[i]);
             }
         }
     }
+    return filtered;
 }
 
 //Realiza busca de cinemas que possuem filmes com o(s) gênero(s) especificado(s).
 
-void searchCinemaByGenresMovie(vector<Cinema> C, vector<Movie> M, string value){
+vector<Cinema> searchCinemaByGenresMovie(vector<Cinema> C, vector<Movie> M, string value){
     vector<string> genres = foo(value);
-
+    vector<Cinema> filtered;
     for(int i=1; i<C.size(); i++){
         vector<string> tconst = C[i].getMovies();
         for(int t = 0; t<tconst.size(); t++){
             int index = binarySearch(M, tconst[t]);
             if(M[index].getGenres() == genres)
-                imprimeCinema(C[i],M);
+                filtered.push_back(C[i]);
         }
     }
+    return filtered;
 }
 
 //Realiza busca de cinemas dentro da distância máxima solicitada pelo usuário.
 
-void searchByDistance(vector<Cinema> C, vector<Movie> M, double xAxis, double yAxis, double maxDistance){
+vector<Cinema> searchByDistance(vector<Cinema> C, vector<Movie> M, double xAxis, double yAxis, double maxDistance){
+    vector<Cinema> filtered;
     for(int i=1; i<C.size(); i++){
         double x = stod(C[i].getXCoordinate());
         double y = stod(C[i].getYCoordinate());
         double distance = sqrt(pow(x - xAxis, 2.0) + pow(y - yAxis, 2.0));
         if(distance <= maxDistance)
-            imprimeCinema(C[i], M);
+            filtered.push_back(C[i]);
     }
+    return filtered;
 }
 
 void filterApplier(string key, string values, vector<Movie>& m){
