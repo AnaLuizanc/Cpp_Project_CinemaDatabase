@@ -10,7 +10,17 @@
 
 using namespace std;
 
-vector<string> foo(string value);
+vector<string> foo(string value){
+    string linha = value;
+    stringstream ss(linha);
+    string item;
+    vector<string> values;
+
+    while(getline(ss, item, ','))
+        values.push_back(item);
+
+    return values;
+}
 
 //Realiza Selection Sort do vetor Cinema.
 
@@ -108,13 +118,8 @@ void insertMovie(vector<string> coluna, vector<Movie>& Movies){
     novo.setEndYear(coluna[6]);
     novo.setRuntimeMinutes(coluna[7]);
 
-    string linha = coluna[8];
-    stringstream ss(linha);
-    string item;
-    vector<string> genres;
+    vector<string> genres = foo(coluna[8]);
     
-    while(getline(ss, item, ','))
-        genres.push_back(item);
     novo.setGenres(genres);
 
     Movies.push_back(novo);
@@ -140,14 +145,8 @@ void imprimeMovie(Movie a){
 //Realiza a busca por tipo de filme.
 
 vector<Movie> searchByTitleType(vector<Movie> M, string value){
-    string linha = value;
-    stringstream ss(linha);
-    string item;
+    vector<string> titleType = foo(value);
     vector<Movie> filtered;
-    vector<string> titleType;
-    
-    while(getline(ss, item, ','))
-        titleType.push_back(item);
 
     for(int i = 1; i < M.size(); i++){
         for(int j = 0; j<titleType.size(); j++){
@@ -164,14 +163,8 @@ vector<Movie> searchByTitleType(vector<Movie> M, string value){
 //|
 
 vector<Movie> searchByGenres(vector<Movie> M, string value){
+    vector<string> genres = foo(value);
     vector<Movie> filtered;
-    string linha = value;
-    stringstream ss(linha);
-    string item;
-    vector<string> genres;
-    
-    while(getline(ss, item, ','))
-        genres.push_back(item);
 
     for(int i=1; i<M.size(); i++){
         vector<string> genresMovie = M[i].getGenres();
@@ -224,7 +217,6 @@ vector<Movie> searchByYear(vector<Movie> M, string value){
         if(M[i].getStartYear() == value || M[i].getEndYear() == value)
             filtered.push_back(M[i]);
     }
-
     return filtered;
 }
 
@@ -294,13 +286,7 @@ void imprimeCinema(Cinema a, vector<Movie>& m){
 //Realiza busca de cinemas que possuem filmes do(s) tipo(s) (titleType) especificado
 
 void searchCinemaByTitleType(vector<Cinema> C, vector<Movie> M, string value){
-    string linha = value;
-    stringstream ss(linha);
-    string item;
-    vector<string> titlesType;
-
-    while(getline(ss, item, ','))
-        titlesType.push_back(item);
+    vector<string> titlesType = foo(value);
 
     for(int i=1; i<C.size(); i++){
         vector<string> tconst = C[i].getMovies();
@@ -329,18 +315,6 @@ void searchCinemaByYearMovie(vector<Cinema> C, vector<Movie> M, string year){
 }
 
 //Realiza busca de cinemas que possuem filmes do período de anos especifcado.
-
-vector<string> foo(string value){
-    string linha = value;
-    stringstream ss(linha);
-    string item;
-    vector<string> values;
-
-    while(getline(ss, item, ','))
-        values.push_back(item);
-
-    return values;
-}
 
 void searchCinemaByRangeYearsMovie(vector<Cinema> C, vector<Movie> M, string value){
     vector<string> values = foo(value);
@@ -381,13 +355,7 @@ void searchCinemaByRuntimeMinutesMovie(vector<Cinema> C, vector<Movie> M, int st
 //Realiza busca de cinemas que possuem filmes com o(s) gênero(s) especificado(s).
 
 void searchCinemaByGenresMovie(vector<Cinema> C, vector<Movie> M, string value){
-    string linha = value;
-    stringstream ss(linha);
-    string item;
-    vector<string> genres;
-
-    while(getline(ss, item, ','))
-        genres.push_back(item);
+    vector<string> genres = foo(value);
 
     for(int i=1; i<C.size(); i++){
         vector<string> tconst = C[i].getMovies();
