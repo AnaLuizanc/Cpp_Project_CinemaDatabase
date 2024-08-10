@@ -10,6 +10,8 @@
 
 using namespace std;
 
+vector<string> foo(string value);
+
 //Realiza Selection Sort do vetor Cinema.
 
 void selectionSort(vector<Cinema>& c){
@@ -192,14 +194,19 @@ void searchByIsAdult(vector<Movie> M, string isAdult){
 
 //Realiza a busca por duração do filme.
 
-void searchByRuntimeMinutes(vector<Movie> M, int startValue, int endValue){
+vector<Movie> searchByRuntimeMinutes(vector<Movie> M, string value){
+    vector<Movie> filtered;
+    vector<string> values = foo(value);
+    int startValue = stoi(values[0]);
+    int endValue = stoi(values[1]);
     for(int i = 1; i < M.size(); i++){
         if(M[i].getRuntimeMinutes() != "\\N"){
             int runtime = stoi(M[i].getRuntimeMinutes());
             if(runtime >= startValue && runtime <= endValue)
-                imprimeMovie(M[i]);
+                filtered.push_back(M[i]);
         }
     }
+    return filtered;
 }
 
 //Realiza a busca por ano do filme.
@@ -393,16 +400,17 @@ void searchByDistance(vector<Cinema> C, vector<Movie> M, double xAxis, double yA
 }
 
 void filterApplier(string key, string values, vector<Movie>& m){
-    
     if(key == "titleType")
         m = searchByTitleType(m, values);
     else if(key == "year")
         m = searchByYear(m, values);
     else if(key == "rangeYears"){
-        //2018,2022
-        //cout << "D"
+        //m = searchCinemaByRangeYearsMovie(m, values);
     }
-        //m = searchByRangeYears()
+    else if(key == "Minutes")
+        m = searchByRuntimeMinutes(m, values);
+
+    
 }
 
 vector<Movie> splitString(const string& input, vector<Movie> m){
