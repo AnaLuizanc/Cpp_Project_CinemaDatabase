@@ -9,42 +9,6 @@ using namespace std;
 #include "./headers/Cinema.hpp"
 #include "Functions.cpp"
 
-void filterApplier(string key, string values, vector<Movie>& m){
-    if(key == "titleType")
-        m = searchByTitleType(m, values);
-    else if(key == "year")
-        m = searchByYear(m, values);
-}
-
-vector<Movie> splitString(const string& input, vector<Movie> m){
-    stringstream ss(input);
-    string token;
-    string key;
-    string values;
-
-    vector<Movie> filtered = m;
-    
-
-    while (getline(ss, token, '(')) {
-        key = token;
-        getline(ss, token, ')');
-
-        stringstream value_ss(token);
-        string value;
-        while (getline(value_ss, value)) {
-            values = value;
-        }
-
-        filterApplier(key, values, filtered);
-        key.clear();
-        values.clear();
-        
-    }
-
-    return filtered;
-}
-
-
 int main(){
     ifstream arquivoCinema("../Database/cinemas.txt");
     ifstream arquivoMovies("../Database/movies.txt");
@@ -86,7 +50,7 @@ int main(){
             insertMovie(linhaMovies, M);
         }
     }
-
+/*
     string query;
 
     cout << "Insira a query: ";
@@ -98,7 +62,12 @@ int main(){
 
     for(int i = 0; i < newFiltered.size(); i++)
         imprimeMovie(newFiltered[i]);
+*/
 
+    //searchByRangeYears(M, 2018,2020);
+    
+    //searchCinemaByRangeYearsMovie(C,M,2018,2020);
+    searchCinemaByRangeYearsMovie(C,M,"2018,2020");
    
     return 0;
 }

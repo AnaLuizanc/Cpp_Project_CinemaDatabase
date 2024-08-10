@@ -221,7 +221,7 @@ void searchByRangeYears(vector<Movie> M, int startValue, int endValue){
         if(M[i].getEndYear() != "\\N"){
             int startYear = stoi(M[i].getStartYear());
             int endYear = stoi(M[i].getEndYear());
-            if(startValue >= startYear && endValue <= endYear)
+            if(startValue <= startYear && endValue >= endYear)
                 imprimeMovie(M[i]);
         }
     }
@@ -311,7 +311,22 @@ void searchCinemaByYearMovie(vector<Cinema> C, vector<Movie> M, string year){
 
 //Realiza busca de cinemas que possuem filmes do período de anos especifcado.
 
-void searchCinemaByRangeYearsMovie(vector<Cinema> C, vector<Movie> M, int startValue, int endValue){
+vector<string> foo(string value){
+    string linha = value;
+    stringstream ss(linha);
+    string item;
+    vector<string> values;
+
+    while(getline(ss, item, ','))
+        values.push_back(item);
+
+    return values;
+}
+
+void searchCinemaByRangeYearsMovie(vector<Cinema> C, vector<Movie> M, string value){
+    vector<string> values = foo(value);
+    int startValue = stoi(values[0]);
+    int endValue = stoi(values[1]);
     for(int i=1; i<C.size(); i++){
         vector<string> tconst = C[i].getMovies();
         for(int t = 0; t<tconst.size(); t++){
@@ -319,8 +334,10 @@ void searchCinemaByRangeYearsMovie(vector<Cinema> C, vector<Movie> M, int startV
             if(M[index].getEndYear() != "\\N"){
                 int startYear = stoi(M[index].getStartYear());
                 int endYear = stoi(M[index].getEndYear());
-                if(startValue >= startYear && endValue <= endYear)
-                    imprimeCinema(C[i],M);
+                if(startValue <= startYear && endValue >= endYear){
+                        imprimeCinema(C[i],M);
+                        imprimeMovie(M[index]);
+                }
             }
         }
     }
@@ -373,4 +390,45 @@ void searchByDistance(vector<Cinema> C, vector<Movie> M, double xAxis, double yA
         if(distance <= maxDistance)
             imprimeCinema(C[i], M);
     }
+}
+
+void filterApplier(string key, string values, vector<Movie>& m){
+    
+    if(key == "titleType")
+        m = searchByTitleType(m, values);
+    else if(key == "year")
+        m = searchByYear(m, values);
+    else if(key == "rangeYears"){
+        //2018,2022
+        //cout << "D"
+    }
+        //m = searchByRangeYears()
+}
+
+vector<Movie> splitString(const string& input, vector<Movie> m){
+    stringstream ss(input);
+    string token;
+    string key;
+    string values;
+
+    vector<Movie> filtered = m;
+    
+
+    while (getline(ss, token, '(')) {
+        key = token;
+        getline(ss, token, ')');
+
+        stringstream value_ss(token);
+        string value;
+        while (getline(value_ss, value)) {
+            values = value;
+        }
+
+        filterApplier(key, values, filtered);
+        key.clear();
+        values.clear();
+        
+    }
+
+    return filtered;
 }
