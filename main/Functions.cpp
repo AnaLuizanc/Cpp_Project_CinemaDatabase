@@ -448,9 +448,9 @@ vector<Cinema> removeRepeated(vector<Cinema> c){
 }
 
 void filterApplierC(string key, string values, vector<Movie> m, vector<Cinema>& c){
-    if(key == "TitleType")
+    if(key == "tipo")
         c = searchCinemaByTitleType(c, m, values);
-    else if(key == "Year")
+    else if(key == "ano")
         c = searchCinemaByYearMovie(c, m, values);
     else if(key == "RangeYear")
         c = searchCinemaByRangeYearsMovie(c, m, values);
@@ -511,9 +511,53 @@ vector<Cinema> splitStringCinema(const string& input, vector<Movie> m, vector<Ci
         values.clear();
 
     }
-    //filtered = removeRepeated(filtered);
     return filtered;
 }
+
+/*vector<Cinema> spliStringCinemav2(const string& input, vector<Movie> m, vector<Cinema> c){
+    istringstream ss(input);
+    string token;
+    string key;
+    string values;
+
+    vector<Cinema> filtered = c;
+
+    while (ss >> token) {
+        if (token == "tipo") {
+            string item;
+            while(getline(ss, item, '(')){
+                getline(ss, item, ')');
+
+                string value;
+                stringstream value_ss(item);
+                while(getline(value_ss, value))
+                    values = value;   
+                break;    
+            }
+            cout << token << " aa" << values << endl;
+            filterApplierC(token, values, m, filtered);
+            token.clear();
+            values.clear();
+        }
+
+        else if(token == "ano"){
+            string item;
+            while(getline(ss, item, '(')){
+                getline(ss, item, ')');
+
+                string value;
+                stringstream value_ss(item);
+                while(getline(value_ss, value))
+                    values = value;   
+                break;    
+            }
+            filterApplierC  (token, values, m, filtered);
+            token.clear();
+            values.clear();
+        }
+    }
+    return filtered;
+}*/
 
 void menu(vector <Movie> M, vector <Cinema> C){
     int opc;
