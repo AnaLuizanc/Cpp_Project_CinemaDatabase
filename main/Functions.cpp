@@ -144,6 +144,14 @@ void imprimeMovie(Movie a){
 
 //Realiza a busca por tipo de filme.
 
+bool collisionVerifier(vector<string> inserted, string value){
+    bool result = false;
+    for(int i = 0; i < inserted.size(); i++)
+        if(value == inserted[i])
+            result = true;
+    return result;
+}
+
 vector<Movie> searchByTitleType(vector<Movie> M, string value){
     vector<string> titleType = foo(value);
     vector<Movie> filtered;
@@ -262,8 +270,15 @@ void showMoviesName(Cinema c, vector<Movie>& m){
     vector<string> tconst = c.getMovies();
     for(int i=0; i < tconst.size(); i++){
         int indice = binarySearch(m,tconst[i]);
-        if(indice != -1)
-            cout << m[indice].getPrimaryTitle() << endl;
+        /*if(indice != -1)
+            cout << m[indice].getPrimaryTitle() << " " << m[indice].getTitleType() << endl;*/
+        if(indice != -1){
+            vector<string> genres = m[indice].getGenres();
+            cout << m[indice].getPrimaryTitle() << " ";
+            for(int j = 0; j < genres.size(); j++)
+                cout << genres[j] << " ";
+            cout << endl;
+        }
     }
     cout << endl;    
 }
@@ -281,23 +296,27 @@ void imprimeCinema(Cinema a, vector<Movie>& m){
         cout << movies[i] << " ";
     cout << endl;
     //showMoviesName(a,m);
+    //cout << endl;
 }
 
 //Realiza busca de cinemas que possuem filmes do(s) tipo(s) (titleType) especificado
 
 vector<Cinema> searchCinemaByTitleType(vector<Cinema> C, vector<Movie> M, string value){
     vector<string> titlesType = foo(value);
+    vector<string> inserted;
     vector<Cinema> filtered;
     for(int i=1; i<C.size(); i++){
         vector<string> tconst = C[i].getMovies();
         for(int t = 0; t<tconst.size(); t++){
             int index = binarySearch(M, tconst[t]);
             for(int j = 0; j<titlesType.size(); j++){
-                if(M[index].getTitleType() == titlesType[j]){
+                if(M[index].getTitleType() == titlesType[j] && !collisionVerifier(inserted, C[i].getCinemaID())){
                     filtered.push_back(C[i]);
+                    inserted.push_back(C[i].getCinemaID());
                 }
             }
         }
+       
     }
     return filtered;
 }
@@ -306,12 +325,15 @@ vector<Cinema> searchCinemaByTitleType(vector<Cinema> C, vector<Movie> M, string
 
 vector<Cinema> searchCinemaByYearMovie(vector<Cinema> C, vector<Movie> M, string year){
     vector<Cinema> filtered;
+    vector<string> inserted;
     for(int i=1; i<C.size(); i++){
         vector<string> tconst = C[i].getMovies();  
         for(int t = 0; t<tconst.size(); t++){
             int index = binarySearch(M, tconst[t]);
-            if(M[index].getStartYear() == year || M[index].getEndYear() == year)
+            if((M[index].getStartYear() == year || M[index].getEndYear() == year) && !collisionVerifier(inserted, C[i].getCinemaID())){
                 filtered.push_back(C[i]);
+                inserted.push_back(C[i].getCinemaID());
+            }       
         }
     }
     return filtered;
@@ -322,6 +344,7 @@ vector<Cinema> searchCinemaByYearMovie(vector<Cinema> C, vector<Movie> M, string
 vector<Cinema> searchCinemaByRangeYearsMovie(vector<Cinema> C, vector<Movie> M, string value){
     vector<string> values = foo(value);
     vector<Cinema> filtered;
+    vector<string> inserted;
     int startValue = stoi(values[0]);
     int endValue = stoi(values[1]);
     for(int i=1; i<C.size(); i++){
@@ -331,8 +354,10 @@ vector<Cinema> searchCinemaByRangeYearsMovie(vector<Cinema> C, vector<Movie> M, 
             if(M[index].getEndYear() != "\\N"){
                 int startYear = stoi(M[index].getStartYear());
                 int endYear = stoi(M[index].getEndYear());
-                if(startValue <= startYear && endValue >= endYear)
+                if(startValue <= startYear && endValue >= endYear && !collisionVerifier(inserted, C[i].getCinemaID())){
                     filtered.push_back(C[i]);
+                    inserted.push_back(C[i].getCinemaID());
+                }
             }
         }
     }
@@ -341,16 +366,24 @@ vector<Cinema> searchCinemaByRangeYearsMovie(vector<Cinema> C, vector<Movie> M, 
 
 //Realiza busca de cinemas que possuem filmes dentro do limite especificado.
 
-vector<Cinema> searchCinemaByRuntimeMinutesMovie(vector<Cinema> C, vector<Movie> M, int startValue, int endValue){
+vector<Cinema> searchCinemaByRuntimeMinutesMovie(vector<Cinema> C, vector<Movie> M, string value){
     vector<Cinema> filtered;
+    vector<string> inserted;
+    vector<string> values = foo(value);
+
+    int startValue = stoi(values[0]);
+    int endValue = stoi(values[1]);
+
     for(int i=1; i<C.size(); i++){
         vector<string> tconst = C[i].getMovies();
         for(int t = 0; t<tconst.size(); t++){
             int index = binarySearch(M, tconst[t]);
             if(M[index].getRuntimeMinutes() != "\\N"){
                 int runtime = stoi(M[index].getRuntimeMinutes());
-                if(runtime >= startValue && runtime <= endValue)
+                if(runtime >= startValue && runtime <= endValue && !collisionVerifier(inserted, C[i].getCinemaID())){
                     filtered.push_back(C[i]);
+                    inserted.push_back(C[i].getCinemaID());
+                }
             }
         }
     }
@@ -359,15 +392,18 @@ vector<Cinema> searchCinemaByRuntimeMinutesMovie(vector<Cinema> C, vector<Movie>
 
 //Realiza busca de cinemas que possuem filmes com o(s) gênero(s) especificado(s).
 
-vector<Cinema> searchCinemaByGenresMovie(vector<Cinema> C, vector<Movie> M, string value){
+vector<Cinema> searchCinemaByGenresMovie(vector<Cinema> C, vector<Movie> M, string value){ // &
     vector<string> genres = foo(value);
     vector<Cinema> filtered;
+    vector<string> inserted;
     for(int i=1; i<C.size(); i++){
         vector<string> tconst = C[i].getMovies();
         for(int t = 0; t<tconst.size(); t++){
             int index = binarySearch(M, tconst[t]);
-            if(M[index].getGenres() == genres)
+            if(M[index].getGenres() == genres && !collisionVerifier(inserted, C[i].getCinemaID())){
                 filtered.push_back(C[i]);
+                inserted.push_back(C[i].getCinemaID());
+            }
         }
     }
     return filtered;
@@ -402,6 +438,35 @@ void filterApplier(string key, string values, vector<Movie>& m){
         m = searchByIsAdult(m, values);
 }
 
+vector<Cinema> removeRepeated(vector<Cinema> c){
+    vector<string>id;
+    vector<Cinema> noRepeated;
+    for(int i = 0; i < c.size(); i++){
+        bool verifier = false;
+        for(int j = 0; j < id.size(); j++)
+            if(c[i].getCinemaID() == id[j])
+                verifier = true;
+        
+        if(verifier == false)
+            noRepeated.push_back(c[i]);
+
+    }
+    return noRepeated;
+}
+
+void filterApplierC(string key, string values, vector<Movie> m, vector<Cinema>& c){
+    if(key == "TitleType")
+        c = searchCinemaByTitleType(c, m, values);
+    else if(key == "Year")
+        c = searchCinemaByYearMovie(c, m, values);
+    else if(key == "RangeYear")
+        c = searchCinemaByRangeYearsMovie(c, m, values);
+    else if(key == "Time")
+        c = searchCinemaByRuntimeMinutesMovie(c, m, values);
+    else if(key == "Genres")
+        c = searchCinemaByGenresMovie(c, m, values);
+}
+
 vector<Movie> splitString(const string& input, vector<Movie> m){
     stringstream ss(input);
     string token;
@@ -428,4 +493,68 @@ vector<Movie> splitString(const string& input, vector<Movie> m){
     }
 
     return filtered;
+}
+
+vector<Cinema> splitStringCinema(const string& input, vector<Movie> m, vector<Cinema> c){
+    stringstream ss(input);
+    string token;
+    string key;
+    string values;
+    vector<Cinema> filtered = c;
+
+    while(getline(ss, token, '(')){
+        key = token;
+        getline(ss, token, ')');
+
+        stringstream value_ss(token);
+        string value;
+        while(getline(value_ss, value))
+            values = value;
+
+        filterApplierC(key, values, m, filtered);
+        key.clear();
+        values.clear();
+
+    }
+    //filtered = removeRepeated(filtered);
+    return filtered;
+}
+
+void menu(vector <Movie> M, vector <Cinema> C){
+    int opc;
+    string query;
+    do{
+        cout << endl;
+        cout << "1. Procurar por filmes." << endl;
+        cout << "2. Procurar por cinema" << endl;
+        cout << endl;
+        cout << "0.Sair";
+        cout << endl;
+        cout << "Insira a opc: ";
+        cin >> opc;
+        cout << endl;
+        
+        switch(opc){
+            case 1:
+            {
+                cout << "Insira a query: ";
+                cin >> query;
+                vector<Movie> newFiltered = splitString(query, M);
+                for(int i = 0; i < newFiltered.size(); i++)
+                    imprimeMovie(newFiltered[i]);
+                break;
+
+            }
+            case 2:
+            {
+                cout << "Insira a query: ";
+                cin >> query;
+                vector<Cinema> newFiltered = splitStringCinema(query, M, C);
+                for(int i = 0; i < newFiltered.size(); i++)
+                    imprimeCinema(newFiltered[i], M);
+                break;
+            }
+        }
+    }while(opc != 0);
+    cout << "Programa encerrado";
 }

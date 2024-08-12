@@ -9,6 +9,7 @@ using namespace std;
 #include "./headers/Cinema.hpp"
 #include "Functions.cpp"
 
+
 int main(){
     ifstream arquivoCinema("../Database/cinemas.txt");
     ifstream arquivoMovies("../Database/movies.txt");
@@ -51,19 +52,7 @@ int main(){
         }
     }
 
-    string query;
+    menu(M, C);
 
-    cout << "Insira a query: ";
-    cin >> query;
-
-    cout << endl;
-
-    vector<Movie> newFiltered = splitString(query, M);
-
-    for(int i = 0; i < newFiltered.size(); i++)
-        imprimeMovie(newFiltered[i]);
-
-
-   
     return 0;
 }
