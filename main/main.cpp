@@ -52,6 +52,9 @@ int main(){
             insertMovie(linhaMovies, M);
         }
     }
+
+    mergeSort(M, 0, M.size()-1);
+
     auto end = chrono::high_resolution_clock::now();
     const chrono::duration<double> duration = end - start;
     cout << duration.count() << "s" << endl; 

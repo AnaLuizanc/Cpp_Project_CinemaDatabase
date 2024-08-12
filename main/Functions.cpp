@@ -267,20 +267,12 @@ void insertCinema(vector<string> coluna, vector<Cinema>& Cinemas){
 //Imprime os respectivos títulos disponíveis em um determinado Cinema.
 
 void showMoviesName(Cinema c, vector<Movie>& m){
-    mergeSort(m, 0, m.size()-1);
     vector<string> tconst = c.getMovies();
     for(int i=0; i < tconst.size(); i++){
         int indice = binarySearch(m,tconst[i]);
-        /*if(indice != -1)
-            cout << m[indice].getPrimaryTitle() << " " << m[indice].getTitleType() << endl;*/
-        if(indice != -1){
-            vector<string> genres = m[indice].getGenres();
-            cout << m[indice].getPrimaryTitle() << " ";
-            for(int j = 0; j < genres.size(); j++)
-                cout << genres[j] << " ";
-            cout << endl;
-        }
-    }
+        if(indice != -1)
+            imprimeMovie(m[indice]);
+        }    
     cout << endl;    
 }
 
@@ -296,7 +288,7 @@ void imprimeCinema(Cinema a, vector<Movie>& m){
     for(int i=0; i < movies.size(); i++)
         cout << movies[i] << " ";
     cout << endl;
-    //showMoviesName(a,m);
+    showMoviesName(a,m);
     //cout << endl;
 }
 
