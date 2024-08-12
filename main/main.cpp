@@ -11,6 +11,7 @@ using namespace std;
 
 
 int main(){
+    auto start = chrono::high_resolution_clock::now();
     ifstream arquivoCinema("../Database/cinemas.txt");
     ifstream arquivoMovies("../Database/movies.txt");
  
@@ -51,6 +52,9 @@ int main(){
             insertMovie(linhaMovies, M);
         }
     }
+    auto end = chrono::high_resolution_clock::now();
+    const chrono::duration<double> duration = end - start;
+    cout << duration.count() << "s" << endl; 
 
     menu(M, C);
 

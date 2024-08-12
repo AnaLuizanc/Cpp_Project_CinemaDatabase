@@ -7,6 +7,7 @@
 #include <string>
 #include <cstring>
 #include <cmath>
+#include <chrono>
 
 using namespace std;
 
@@ -465,6 +466,8 @@ void filterApplierC(string key, string values, vector<Movie> m, vector<Cinema>& 
         c = searchCinemaByRuntimeMinutesMovie(c, m, values);
     else if(key == "Genres")
         c = searchCinemaByGenresMovie(c, m, values);
+    else
+        return;
 }
 
 vector<Movie> splitString(const string& input, vector<Movie> m){
@@ -539,9 +542,18 @@ void menu(vector <Movie> M, vector <Cinema> C){
             {
                 cout << "Insira a query: ";
                 cin >> query;
+
+                auto start = chrono::high_resolution_clock::now();
+
                 vector<Movie> newFiltered = splitString(query, M);
                 for(int i = 0; i < newFiltered.size(); i++)
                     imprimeMovie(newFiltered[i]);
+
+                cout << endl;
+                auto end = chrono::high_resolution_clock::now();
+                const chrono::duration<double> duration = end - start;
+                cout << duration.count() << "s" << endl; 
+                
                 break;
 
             }
@@ -549,9 +561,16 @@ void menu(vector <Movie> M, vector <Cinema> C){
             {
                 cout << "Insira a query: ";
                 cin >> query;
+
+                auto start = chrono::high_resolution_clock::now();
+
                 vector<Cinema> newFiltered = splitStringCinema(query, M, C);
                 for(int i = 0; i < newFiltered.size(); i++)
                     imprimeCinema(newFiltered[i], M);
+
+                auto end = chrono::high_resolution_clock::now();
+                const chrono::duration<double> duration = end - start;
+                cout << duration.count() << "s" << endl; 
                 break;
             }
         }
