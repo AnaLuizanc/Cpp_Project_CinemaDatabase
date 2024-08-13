@@ -1,12 +1,8 @@
 #pragma once
 #include <iostream>
-
 #include "Movie.hpp"
 
-//using namespace std;
-
 class Cinema{
-    public:
     string cinemaID;
     string name;
     string xCoordinate;
@@ -14,6 +10,7 @@ class Cinema{
     string ticketPrice;
     vector<string> movies;
 
+    public:
 
         void setCinemaID(string cinemaID){
             this->cinemaID = cinemaID;
@@ -69,6 +66,4 @@ class Cinema{
         vector<string> getMovies(){
             return movies;
         }
-
 };
-

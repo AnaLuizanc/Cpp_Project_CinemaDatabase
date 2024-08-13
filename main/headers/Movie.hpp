@@ -91,6 +91,4 @@ class Movie{
         vector<string>getGenres(){
             return genres;
         }
-
-
 };
