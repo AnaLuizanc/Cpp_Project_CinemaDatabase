@@ -11,7 +11,7 @@ using namespace std;
 
 
 int main(){
-    auto start = chrono::high_resolution_clock::now();
+    auto startRead = chrono::high_resolution_clock::now();
     ifstream arquivoCinema("../Database/cinemas.txt");
     ifstream arquivoMovies("../Database/movies.txt");
  
@@ -53,12 +53,18 @@ int main(){
         }
     }
 
+    auto endRead = chrono::high_resolution_clock::now();
+    const chrono::duration<double> duration1 = endRead - startRead;
+    cout << "Tempo de leitura dos arquivos de dados: " << duration1.count() << "s" << endl; 
+
+    auto startSort = chrono::high_resolution_clock::now();
+    
     mergeSort(M, 0, M.size()-1);
-
-    auto end = chrono::high_resolution_clock::now();
-    const chrono::duration<double> duration = end - start;
-    cout << duration.count() << "s" << endl; 
-
+    
+    auto endSort = chrono::high_resolution_clock::now();
+    const chrono::duration<double> duration2 = endSort - startSort;
+    cout << "Tempo de ordenação do arquivo de filmes: " << duration2.count() << "s" << endl;
+    
     menu(M, C);
 
     return 0;

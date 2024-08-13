@@ -674,7 +674,7 @@ void menu(vector <Movie> M, vector <Cinema> C){
                 cout << endl;
                 auto end = chrono::high_resolution_clock::now();
                 const chrono::duration<double> duration = end - start;
-                cout << duration.count() << "s" << endl; 
+                cout << "Tempo de filtragem: " << duration.count() << "s" << endl; 
                 
                 break;
 
@@ -693,10 +693,10 @@ void menu(vector <Movie> M, vector <Cinema> C){
 
                 auto end = chrono::high_resolution_clock::now();
                 const chrono::duration<double> duration = end - start;
-                cout << duration.count() << "s" << endl; 
+                cout << "Tempo de filtragem: " << duration.count() << "s" << endl; 
                 break;
             }
         }
     }while(opc != 0);
-    cout << "Programa encerrado" << endl;
+    cout << "Programa encerrado!" << endl;
 }
