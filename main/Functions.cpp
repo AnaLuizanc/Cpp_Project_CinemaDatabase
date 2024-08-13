@@ -427,7 +427,7 @@ vector<Cinema> searchCinemaByRuntimeMinutesMovie(vector<Cinema> C, vector<Movie>
 
 //Realiza busca de cinemas que possuem filmes com o(s) gênero(s) especificado(s).
 
-vector<Cinema> searchCinemaByGenresMovie(vector<Cinema> C, vector<Movie> M, string value){ // &
+vector<Cinema> searchCinemaByGenresAndMovie(vector<Cinema> C, vector<Movie> M, string value){ // &
     vector<string> genres = foo(value);
     vector<Cinema> filtered;
     vector<string> inserted;
@@ -436,6 +436,31 @@ vector<Cinema> searchCinemaByGenresMovie(vector<Cinema> C, vector<Movie> M, stri
         for(int t = 0; t<tconst.size(); t++){
             int index = binarySearch(M, tconst[t]);
             if(M[index].getGenres() == genres && !collisionVerifier(inserted, C[i].getCinemaID())){
+                filtered.push_back(C[i]);
+                inserted.push_back(C[i].getCinemaID());
+            }
+        }
+    }
+    return filtered;
+}
+
+vector<Cinema> searchCinemaByGenresOrMovie(vector<Cinema> C, vector<Movie> M, string value){ // |
+    vector<string> genres = foo(value);
+    vector<Cinema> filtered;
+    vector<string> inserted;
+    for(int i=1; i<C.size(); i++){
+        vector<string> tconst = C[i].getMovies();
+        for(int t = 0; t<tconst.size(); t++){
+            int index = binarySearch(M, tconst[t]);
+            vector<string> genresMovie = M[index].getGenres();
+            bool equal = false;
+            for(int j=0; j<genresMovie.size(); j++){
+                for(int k=0; k < genres.size(); k++){
+                    if(genres[k] == genresMovie[j])
+                        equal = true;
+                }
+            }
+            if(equal && !collisionVerifier(inserted, C[i].getCinemaID())){
                 filtered.push_back(C[i]);
                 inserted.push_back(C[i].getCinemaID());
             }
@@ -541,8 +566,10 @@ void filterApplierCinema(string key, string values, vector<Movie> m, vector<Cine
         c = searchCinemaByRangeYearsMovie(c, m, values);
     else if(key == "Time")
         c = searchCinemaByRuntimeMinutesMovie(c, m, values);
-    else if(key == "Genres")
-        c = searchCinemaByGenresMovie(c, m, values);
+    else if(key == "GenresAnd")
+        c = searchCinemaByGenresAndMovie(c, m, values);
+    else if(key == "GenresOr")
+        c = searchCinemaByGenresOrMovie(c, m, values);
     else if(key == "Distance")
         c = searchByDistance(c, m, values);
     else if(key == "Price")
