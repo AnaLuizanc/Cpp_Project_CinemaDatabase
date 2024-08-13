@@ -446,8 +446,12 @@ vector<Cinema> searchCinemaByGenresMovie(vector<Cinema> C, vector<Movie> M, stri
 
 //Realiza busca de cinemas dentro da distância máxima solicitada pelo usuário.
 
-vector<Cinema> searchByDistance(vector<Cinema> C, vector<Movie> M, double xAxis, double yAxis, double maxDistance){
+vector<Cinema> searchByDistance(vector<Cinema> C, vector<Movie> M, string value){
     vector<Cinema> filtered;
+    vector<string> values = foo(value);
+    double xAxis = stod(values[0]);
+    double yAxis = stod(values[1]);
+    double maxDistance = stod(values[2]);
     for(int i=1; i<C.size(); i++){
         double x = stod(C[i].getXCoordinate());
         double y = stod(C[i].getYCoordinate());
@@ -489,22 +493,7 @@ vector<Cinema> removeRepeated(vector<Cinema> c){
     return noRepeated;
 }
 
-void filterApplierCinema(string key, string values, vector<Movie> m, vector<Cinema>& c){
-    if(key == "tipo")
-        c = searchCinemaByTitleType(c, m, values);
-    else if(key == "ano")
-        c = searchCinemaByYearMovie(c, m, values);
-    else if(key == "RangeYear")
-        c = searchCinemaByRangeYearsMovie(c, m, values);
-    else if(key == "Time")
-        c = searchCinemaByRuntimeMinutesMovie(c, m, values);
-    else if(key == "Genres")
-        c = searchCinemaByGenresMovie(c, m, values);
-    else
-        return;
-}
-
-vector<Movie> splitString(const string& input, vector<Movie> m){
+vector<Movie> splitStringMovie(const string& input, vector<Movie> m){
     stringstream ss(input);
     string token;
     string key;
@@ -530,6 +519,21 @@ vector<Movie> splitString(const string& input, vector<Movie> m){
     }
 
     return filtered;
+}
+
+void filterApplierCinema(string key, string values, vector<Movie> m, vector<Cinema>& c){
+    if(key == "tipo")
+        c = searchCinemaByTitleType(c, m, values);
+    else if(key == "ano")
+        c = searchCinemaByYearMovie(c, m, values);
+    else if(key == "RangeYear")
+        c = searchCinemaByRangeYearsMovie(c, m, values);
+    else if(key == "Time")
+        c = searchCinemaByRuntimeMinutesMovie(c, m, values);
+    else if(key == "Genres")
+        c = searchCinemaByGenresMovie(c, m, values);
+    else if(key == "Distance")
+        c = searchByDistance(c, m, values);
 }
 
 vector<Cinema> splitStringCinema(const string& input, vector<Movie> m, vector<Cinema> c){
@@ -623,7 +627,7 @@ void menu(vector <Movie> M, vector <Cinema> C){
 
                 auto start = chrono::high_resolution_clock::now();
 
-                vector<Movie> newFiltered = splitString(query, M);
+                vector<Movie> newFiltered = splitStringMovie(query, M);
                 for(int i = 0; i < newFiltered.size(); i++)
                     imprimeMovie(newFiltered[i]);
 
