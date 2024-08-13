@@ -499,17 +499,17 @@ vector<Cinema> searchByTicketPrice(vector<Cinema> C, string value){
 }
 
 void filterApplierMovie(string key, string values, vector<Movie>& m){
-    if(key == "TitleType")
+    if(key == "TIPO" || key == "TYPE" || key == "TITLETYPE" || key == "TITLE")
         m = searchByTitleType(m, values);
-    else if(key == "Year")
+    else if(key == "YEAR" || key == "ANO")
         m = searchByYear(m, values);
-    else if(key == "RangeYears")
+    else if(key == "RANGEYEARS")
         m = searchByRangeYears(m, values);
-    else if(key == "Minutes")
+    else if(key == "MINUTES" || key == "TIME")
         m = searchByRuntimeMinutes(m, values);
-    else if(key == "GenresAnd")
+    else if(key == "GENRESAND")
         m = searchByGenresAnd(m, values);
-    else if(key == "GenresOr"){
+    else if(key == "GENRESOR"){
         m = searchByGenresOr(m, values);
     }
 }
@@ -529,6 +529,14 @@ vector<Cinema> removeRepeated(vector<Cinema> c){
     return noRepeated;
 }
 
+string toUpperCase(string value){
+    string up;
+    for(auto c : value)
+        up += toupper(c);
+
+    return up;
+}
+
 vector<Movie> splitStringMovie(const string& input, vector<Movie> m){
     stringstream ss(input);
     string token;
@@ -540,6 +548,7 @@ vector<Movie> splitStringMovie(const string& input, vector<Movie> m){
 
     while (getline(ss, token, '(')) {
         key = token;
+        key = toUpperCase(key);
         getline(ss, token, ')');
 
         stringstream value_ss(token);
@@ -558,21 +567,21 @@ vector<Movie> splitStringMovie(const string& input, vector<Movie> m){
 }
 
 void filterApplierCinema(string key, string values, vector<Movie> m, vector<Cinema>& c){
-    if(key == "tipo")
+    if(key == "TIPO" || key == "TYPE" || key == "TITLETYPE" || key == "TITLE")
         c = searchCinemaByTitleType(c, m, values);
-    else if(key == "ano")
+    else if(key == "ANO" || key == "YEAR")
         c = searchCinemaByYearMovie(c, m, values);
-    else if(key == "RangeYear")
+    else if(key == "RANGEYEARS")
         c = searchCinemaByRangeYearsMovie(c, m, values);
-    else if(key == "Time")
+    else if(key == "TIME" || key == "MINUTES")
         c = searchCinemaByRuntimeMinutesMovie(c, m, values);
-    else if(key == "GenresAnd")
+    else if(key == "GENRESAND")
         c = searchCinemaByGenresAndMovie(c, m, values);
-    else if(key == "GenresOr")
+    else if(key == "GENRESOR")
         c = searchCinemaByGenresOrMovie(c, m, values);
-    else if(key == "Distance")
+    else if(key == "DISTANCE" || key == "DISTANCIA")
         c = searchByDistance(c, m, values);
-    else if(key == "Price")
+    else if(key == "PRICE" || key == "PRECO")
         c = searchByTicketPrice(c,values);
 }
 
@@ -585,6 +594,7 @@ vector<Cinema> splitStringCinema(const string& input, vector<Movie> m, vector<Ci
 
     while(getline(ss, token, '(')){
         key = token;
+        key = toUpperCase(key);
         getline(ss, token, ')');
 
         stringstream value_ss(token);
