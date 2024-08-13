@@ -462,6 +462,17 @@ vector<Cinema> searchByDistance(vector<Cinema> C, vector<Movie> M, string value)
     return filtered;
 }
 
+vector<Cinema> searchByTicketPrice(vector<Cinema> C, string value){
+    vector<Cinema> filtered;
+    double maxPrice = stod(value);
+    for(int i=1; i<C.size(); i++){
+        double price = stod(C[i].getTicketPrice());
+        if(price <= maxPrice)
+            filtered.push_back(C[i]);
+    }
+    return filtered;
+}
+
 void filterApplierMovie(string key, string values, vector<Movie>& m){
     if(key == "TitleType")
         m = searchByTitleType(m, values);
@@ -534,6 +545,8 @@ void filterApplierCinema(string key, string values, vector<Movie> m, vector<Cine
         c = searchCinemaByGenresMovie(c, m, values);
     else if(key == "Distance")
         c = searchByDistance(c, m, values);
+    else if(key == "Price")
+        c = searchByTicketPrice(c,values);
 }
 
 vector<Cinema> splitStringCinema(const string& input, vector<Movie> m, vector<Cinema> c){
