@@ -73,6 +73,33 @@ void mergeSort(vector<Movie>& m, int left, int right){
     merge(m, left, mid, right);
 }
 
+void heapify(vector<Cinema>& C, int n, int i){
+    int largest = i;
+    int left = 2*i+1;
+    int right = 2*i+2;
+
+    if(left < n && C[left].getCinemaID() > C[largest].getCinemaID())
+        largest = left;
+
+    if(right < n && C[right].getCinemaID() > C[largest].getCinemaID())
+        largest = right;
+
+    if(largest != i){
+        swap(C[i], C[largest]);
+        heapify(C,n,largest);
+    }
+}
+
+void heapSort(vector<Cinema>& C, int n){
+    for(int i = n/2 - 1; i>=0; i--)
+        heapify(C, n, i);
+
+    for(int i = n-1; i>0; i--){
+        swap(C[0], C[i]);
+        heapify(C, i, 0);
+    }
+}
+
 //Realiza Busca Binária no vetor de Movies.
 
 int binarySearch(vector<Movie>& m, string elemento){
@@ -458,7 +485,6 @@ vector<Cinema> removeRepeated(vector<Cinema> c){
         
         if(verifier == false)
             noRepeated.push_back(c[i]);
-
     }
     return noRepeated;
 }
@@ -530,6 +556,7 @@ vector<Cinema> splitStringCinema(const string& input, vector<Movie> m, vector<Ci
     return filtered;
 }
 
+/*
 vector<Cinema> splitStringCinemav2(const string& input, vector<Movie> m, vector<Cinema> c){
     stringstream ss(input);
     string token;
@@ -566,7 +593,7 @@ vector<Cinema> splitStringCinemav2(const string& input, vector<Movie> m, vector<
                     values = value;   
                 break;    
             }
-            filterApplierC  (token, values, m, filtered);
+            filterApplierCinema(token, values, m, filtered);
             token.clear();
             values.clear();
         }
@@ -574,17 +601,17 @@ vector<Cinema> splitStringCinemav2(const string& input, vector<Movie> m, vector<
     return filtered;
 }
 
+*/
+
 void menu(vector <Movie> M, vector <Cinema> C){
     int opc;
     string query;
     do{
         cout << endl;
         cout << "1. Procurar por filmes." << endl;
-        cout << "2. Procurar por cinema" << endl;
-        cout << endl;
-        cout << "0.Sair";
-        cout << endl;
-        cout << "Insira a opc: ";
+        cout << "2. Procurar por cinemas." << endl << endl;
+        cout << "0.Sair" <<  endl;
+        cout << "Insira a opção: ";
         cin >> opc;
         cout << endl;
         
@@ -627,5 +654,5 @@ void menu(vector <Movie> M, vector <Cinema> C){
             }
         }
     }while(opc != 0);
-    cout << "Programa encerrado";
+    cout << "Programa encerrado" << endl;
 }
