@@ -143,8 +143,6 @@ void imprimeMovie(Movie a){
     cout << endl;
 }
 
-//Realiza a busca por tipo de filme.
-
 bool collisionVerifier(vector<string> inserted, string value){
     bool result = false;
     for(int i = 0; i < inserted.size(); i++)
@@ -152,6 +150,8 @@ bool collisionVerifier(vector<string> inserted, string value){
             result = true;
     return result;
 }
+
+//Realiza a busca por tipo de filme.
 
 vector<Movie> searchByTitleType(vector<Movie> M, string value){
     vector<string> titleType = foo(value);
@@ -168,10 +168,26 @@ vector<Movie> searchByTitleType(vector<Movie> M, string value){
 
 //Realiza a busca de filmes pelo gênero.
 
-//&
-//|
+vector<Movie> searchByGenresAnd(vector<Movie> M, string value){
+    vector<string> genres = foo(value);
+    vector<Movie> filtered;
 
-vector<Movie> searchByGenres(vector<Movie> M, string value){
+    for(int i=1; i<M.size(); i++){
+        vector<string> genresMovie = M[i].getGenres();
+        if(genres.size() == genresMovie.size()){
+            bool equal = true;
+            for(int j=0; j<genresMovie.size(); j++){
+                if(genres[j] != genresMovie[j])
+                    equal = false;
+            }
+            if(equal)
+                filtered.push_back(M[i]);
+        }
+    }
+    return filtered;
+}
+
+vector<Movie> searchByGenresOr(vector<Movie> M, string value){
     vector<string> genres = foo(value);
     vector<Movie> filtered;
 
@@ -289,7 +305,6 @@ void imprimeCinema(Cinema a, vector<Movie>& m){
         cout << movies[i] << " ";
     cout << endl;
     showMoviesName(a,m);
-    //cout << endl;
 }
 
 //Realiza busca de cinemas que possuem filmes do(s) tipo(s) (titleType) especificado
@@ -416,7 +431,7 @@ vector<Cinema> searchByDistance(vector<Cinema> C, vector<Movie> M, double xAxis,
     return filtered;
 }
 
-void filterApplier(string key, string values, vector<Movie>& m){
+void filterApplierMovie(string key, string values, vector<Movie>& m){
     if(key == "TitleType")
         m = searchByTitleType(m, values);
     else if(key == "Year")
@@ -425,10 +440,11 @@ void filterApplier(string key, string values, vector<Movie>& m){
         m = searchByRangeYears(m, values);
     else if(key == "Minutes")
         m = searchByRuntimeMinutes(m, values);
-    else if(key == "Genres")
-        m = searchByGenres(m, values);
-    else if(key == "Adult")
-        m = searchByIsAdult(m, values);
+    else if(key == "GenresAnd")
+        m = searchByGenresAnd(m, values);
+    else if(key == "GenresOr"){
+        m = searchByGenresOr(m, values);
+    }
 }
 
 vector<Cinema> removeRepeated(vector<Cinema> c){
@@ -447,7 +463,7 @@ vector<Cinema> removeRepeated(vector<Cinema> c){
     return noRepeated;
 }
 
-void filterApplierC(string key, string values, vector<Movie> m, vector<Cinema>& c){
+void filterApplierCinema(string key, string values, vector<Movie> m, vector<Cinema>& c){
     if(key == "tipo")
         c = searchCinemaByTitleType(c, m, values);
     else if(key == "ano")
@@ -481,7 +497,7 @@ vector<Movie> splitString(const string& input, vector<Movie> m){
             values = value;
         }
 
-        filterApplier(key, values, filtered);
+        filterApplierMovie(key, values, filtered);
         key.clear();
         values.clear();
         
@@ -506,7 +522,7 @@ vector<Cinema> splitStringCinema(const string& input, vector<Movie> m, vector<Ci
         while(getline(value_ss, value))
             values = value;
 
-        filterApplierC(key, values, m, filtered);
+        filterApplierCinema(key, values, m, filtered);
         key.clear();
         values.clear();
 
@@ -514,8 +530,8 @@ vector<Cinema> splitStringCinema(const string& input, vector<Movie> m, vector<Ci
     return filtered;
 }
 
-/*vector<Cinema> spliStringCinemav2(const string& input, vector<Movie> m, vector<Cinema> c){
-    istringstream ss(input);
+vector<Cinema> splitStringCinemav2(const string& input, vector<Movie> m, vector<Cinema> c){
+    stringstream ss(input);
     string token;
     string key;
     string values;
@@ -535,11 +551,10 @@ vector<Cinema> splitStringCinema(const string& input, vector<Movie> m, vector<Ci
                 break;    
             }
             cout << token << " aa" << values << endl;
-            filterApplierC(token, values, m, filtered);
+            filterApplierCinema(token, values, m, filtered);
             token.clear();
             values.clear();
         }
-
         else if(token == "ano"){
             string item;
             while(getline(ss, item, '(')){
@@ -557,7 +572,7 @@ vector<Cinema> splitStringCinema(const string& input, vector<Movie> m, vector<Ci
         }
     }
     return filtered;
-}*/
+}
 
 void menu(vector <Movie> M, vector <Cinema> C){
     int opc;
@@ -600,6 +615,7 @@ void menu(vector <Movie> M, vector <Cinema> C){
 
                 auto start = chrono::high_resolution_clock::now();
 
+                //vector<Cinema> newFiltered = splitStringCinemav2(query, M, C);
                 vector<Cinema> newFiltered = splitStringCinema(query, M, C);
                 for(int i = 0; i < newFiltered.size(); i++)
                     imprimeCinema(newFiltered[i], M);
