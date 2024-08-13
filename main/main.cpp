@@ -16,11 +16,6 @@ int main(){
     ifstream arquivoMovies("../Database/movies.txt");
  
     vector <Cinema> C;
-
-    Cinema titulo;
-
-    vector<string> vetMovies;
-
     vector <Movie> M;
 
     vector<string> linhaCinema;
@@ -28,27 +23,25 @@ int main(){
     
     string linha;
 
-
     if(arquivoCinema.is_open() && arquivoMovies.is_open()){
         while(getline(arquivoCinema, linha)){
             linhaCinema.erase(linhaCinema.begin(), linhaCinema.end());
             stringstream ss(linha);
             string item;
-            while(getline(ss, item, ',')){
-                linhaCinema.push_back(item);
-            }
-
-            insertCinema(linhaCinema, C);
-
             
+            while(getline(ss, item, ','))
+                linhaCinema.push_back(item);
+            
+            insertCinema(linhaCinema, C);
         }
         while(getline(arquivoMovies, linha)){
             linhaMovies.erase(linhaMovies.begin(), linhaMovies.end());
             stringstream ss(linha);
             string item;
-            while(getline(ss, item, '\t')){
+            
+            while(getline(ss, item, '\t'))
                 linhaMovies.push_back(item);
-            }
+
             insertMovie(linhaMovies, M);
         }
     }
@@ -59,7 +52,8 @@ int main(){
 
     auto startSort = chrono::high_resolution_clock::now();
     
-    mergeSort(M, 0, M.size()-1);
+    //mergeSort(M, 0, M.size()-1);
+    heapSort(M, M.size());
     
     auto endSort = chrono::high_resolution_clock::now();
     const chrono::duration<double> duration2 = endSort - startSort;

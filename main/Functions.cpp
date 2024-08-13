@@ -73,30 +73,30 @@ void mergeSort(vector<Movie>& m, int left, int right){
     merge(m, left, mid, right);
 }
 
-void heapify(vector<Cinema>& C, int n, int i){
+void heapify(vector<Movie>& M, int n, int i){
     int largest = i;
     int left = 2*i+1;
     int right = 2*i+2;
 
-    if(left < n && C[left].getCinemaID() > C[largest].getCinemaID())
+    if(left < n && M[left].getTconst() > M[largest].getTconst())
         largest = left;
 
-    if(right < n && C[right].getCinemaID() > C[largest].getCinemaID())
+    if(right < n && M[right].getTconst() > M[largest].getTconst())
         largest = right;
 
     if(largest != i){
-        swap(C[i], C[largest]);
-        heapify(C,n,largest);
+        swap(M[i], M[largest]);
+        heapify(M,n,largest);
     }
 }
 
-void heapSort(vector<Cinema>& C, int n){
+void heapSort(vector<Movie>& M, int n){
     for(int i = n/2 - 1; i>=0; i--)
-        heapify(C, n, i);
+        heapify(M, n, i);
 
     for(int i = n-1; i>0; i--){
-        swap(C[0], C[i]);
-        heapify(C, i, 0);
+        swap(M[0], M[i]);
+        heapify(M, i, 0);
     }
 }
 
@@ -290,7 +290,7 @@ vector<Movie> searchByRangeYears(vector<Movie> M, string value){
     return filtered;
 }
 
-//Realiza inserção d eum vetor contendo um Cinema no vetor de Cinemas.
+//Realiza inserção de um vetor contendo um Cinema no vetor de Cinemas.
 
 void insertCinema(vector<string> coluna, vector<Cinema>& Cinemas){
     Cinema novo;
@@ -334,7 +334,7 @@ void imprimeCinema(Cinema a, vector<Movie>& m){
     showMoviesName(a,m);
 }
 
-//Realiza busca de cinemas que possuem filmes do(s) tipo(s) (titleType) especificado
+//Realiza busca de cinemas que possuem filmes do(s) tipo(s) (titleType) especificado.
 
 vector<Cinema> searchCinemaByTitleType(vector<Cinema> C, vector<Movie> M, string value){
     vector<string> titlesType = foo(value);
@@ -487,6 +487,8 @@ vector<Cinema> searchByDistance(vector<Cinema> C, vector<Movie> M, string value)
     return filtered;
 }
 
+//Realiza busca de cinemas com o limite de valor (ticketPrice) especificado.
+
 vector<Cinema> searchByTicketPrice(vector<Cinema> C, string value){
     vector<Cinema> filtered;
     double maxPrice = stod(value);
@@ -497,6 +499,8 @@ vector<Cinema> searchByTicketPrice(vector<Cinema> C, string value){
     }
     return filtered;
 }
+
+//Aplica filtros em Movies.
 
 void filterApplierMovie(string key, string values, vector<Movie>& m){
     if(key == "TIPO" || key == "TYPE" || key == "TITLETYPE" || key == "TITLE")
@@ -514,6 +518,8 @@ void filterApplierMovie(string key, string values, vector<Movie>& m){
     }
 }
 
+//
+
 vector<Cinema> removeRepeated(vector<Cinema> c){
     vector<string>id;
     vector<Cinema> noRepeated;
@@ -528,6 +534,8 @@ vector<Cinema> removeRepeated(vector<Cinema> c){
     }
     return noRepeated;
 }
+
+//Tranforma chave de estrada em CAIXA ALTA.
 
 string toUpperCase(string value){
     string up;
@@ -545,7 +553,6 @@ vector<Movie> splitStringMovie(const string& input, vector<Movie> m){
 
     vector<Movie> filtered = m;
     
-
     while (getline(ss, token, '(')) {
         key = token;
         key = toUpperCase(key);
@@ -553,18 +560,17 @@ vector<Movie> splitStringMovie(const string& input, vector<Movie> m){
 
         stringstream value_ss(token);
         string value;
-        while (getline(value_ss, value)) {
+        while (getline(value_ss, value))
             values = value;
-        }
 
         filterApplierMovie(key, values, filtered);
         key.clear();
-        values.clear();
-        
+        values.clear();   
     }
-
     return filtered;
 }
+
+//Aplica filtros em Cinema.
 
 void filterApplierCinema(string key, string values, vector<Movie> m, vector<Cinema>& c){
     if(key == "TIPO" || key == "TYPE" || key == "TITLETYPE" || key == "TITLE")
@@ -584,6 +590,8 @@ void filterApplierCinema(string key, string values, vector<Movie> m, vector<Cine
     else if(key == "PRICE" || key == "PRECO")
         c = searchByTicketPrice(c,values);
 }
+
+//
 
 vector<Cinema> splitStringCinema(const string& input, vector<Movie> m, vector<Cinema> c){
     stringstream ss(input);
