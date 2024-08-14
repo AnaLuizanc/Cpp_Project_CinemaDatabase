@@ -2,7 +2,6 @@
 #include <cstring>
 #include <vector>
 #include <string>
-//#include <stack>
 
 using namespace std;
 
@@ -52,7 +51,6 @@ int main(){
 
     auto startSort = chrono::high_resolution_clock::now();
     
-    //mergeSort(M, 0, M.size()-1);
     heapSort(M, M.size());
     
     auto endSort = chrono::high_resolution_clock::now();
