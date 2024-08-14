@@ -156,8 +156,7 @@ void insertMovie(vector<string> coluna, vector<Movie>& Movies){
 //Realiza impressão de um filme específico.
 
 void imprimeMovie(Movie a){
-    cout << /*a.getTconst() <<*/ "|";
-    cout << a.getTitleType() << "| ";
+    cout << "|" << a.getTitleType() << "| ";
     cout << a.getPrimaryTitle() << " | ";
     if(a.getPrimaryTitle() != a.getOriginalTitle())
         cout << a.getOriginalTitle() << " | ";
@@ -406,6 +405,12 @@ vector<Cinema> searchCinemaByRangeYearsMovie(vector<Cinema> C, vector<Movie> M, 
                     filtered.push_back(C[i]);
                     inserted.push_back(C[i].getCinemaID());
                 }
+            }
+            else if(M[index].getStartYear() != "\\N"){
+                int startYear = stoi(M[index].getStartYear());
+                if(startYear == startValue || startYear == endValue)
+                    filtered.push_back(C[i]);
+                    inserted.push_back(C[i].getCinemaID());
             }
         }
     }
