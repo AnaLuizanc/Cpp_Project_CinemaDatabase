@@ -156,17 +156,24 @@ void insertMovie(vector<string> coluna, vector<Movie>& Movies){
 //Realiza impressão de um filme específico.
 
 void imprimeMovie(Movie a){
-    cout << a.getTconst() << " | ";
-    cout << a.getTitleType() << " | ";
+    cout << /*a.getTconst() <<*/ "|";
+    cout << a.getTitleType() << "| ";
     cout << a.getPrimaryTitle() << " | ";
-    cout << a.getOriginalTitle() << " | ";
-    cout << a.getIsAdult() << " | ";
+    if(a.getPrimaryTitle() != a.getOriginalTitle())
+        cout << a.getOriginalTitle() << " | ";
+    if(a.getIsAdult() != "0")
+        cout << "AdultTitle | ";
     cout << a.getStartYear() << " | ";
-    cout << a.getEndYear() << " | ";
-    cout << a.getRuntimeMinutes() << " | ";
+    if(a.getEndYear() != "\\N")
+        cout << a.getEndYear() << " | ";
+    if(a.getRuntimeMinutes() != "\\N")
+        cout << a.getRuntimeMinutes() << " | ";
     vector<string> genres = a.getGenres();
     for(int i = 0; i < genres.size(); i++)
-        cout << genres[i] << " ";
+        if(i != genres.size() - 1)
+            cout << genres[i] << ", ";
+        else
+            cout << genres[i];
     cout << endl;
 }
 
@@ -516,6 +523,8 @@ void filterApplierMovie(string key, string values, vector<Movie>& m){
     else if(key == "GENRESOR"){
         m = searchByGenresOr(m, values);
     }
+    else if(key == "ADULT" || key == "ADULTO")
+        m = searchByIsAdult(m, values);
 }
 
 //
@@ -618,53 +627,6 @@ vector<Cinema> splitStringCinema(const string& input, vector<Movie> m, vector<Ci
     return filtered;
 }
 
-/*
-vector<Cinema> splitStringCinemav2(const string& input, vector<Movie> m, vector<Cinema> c){
-    stringstream ss(input);
-    string token;
-    string key;
-    string values;
-
-    vector<Cinema> filtered = c;
-
-    while (ss >> token) {
-        if (token == "tipo") {
-            string item;
-            while(getline(ss, item, '(')){
-                getline(ss, item, ')');
-
-                string value;
-                stringstream value_ss(item);
-                while(getline(value_ss, value))
-                    values = value;   
-                break;    
-            }
-            cout << token << " aa" << values << endl;
-            filterApplierCinema(token, values, m, filtered);
-            token.clear();
-            values.clear();
-        }
-        else if(token == "ano"){
-            string item;
-            while(getline(ss, item, '(')){
-                getline(ss, item, ')');
-
-                string value;
-                stringstream value_ss(item);
-                while(getline(value_ss, value))
-                    values = value;   
-                break;    
-            }
-            filterApplierCinema(token, values, m, filtered);
-            token.clear();
-            values.clear();
-        }
-    }
-    return filtered;
-}
-
-*/
-
 void menu(vector <Movie> M, vector <Cinema> C){
     int opc;
     string query;
@@ -672,7 +634,7 @@ void menu(vector <Movie> M, vector <Cinema> C){
         cout << endl;
         cout << "1. Procurar por filmes." << endl;
         cout << "2. Procurar por cinemas." << endl << endl;
-        cout << "0.Sair" <<  endl;
+        cout << "0. Sair" <<  endl;
         cout << "Insira a opção: ";
         cin >> opc;
         cout << endl;
