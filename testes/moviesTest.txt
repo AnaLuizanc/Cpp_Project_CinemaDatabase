@@ -1,8 +1,0 @@
-tconst	titleType	primaryTitle	originalTitle	isAdult	startYear	endYear	runtimeMinutes	genres
-tt8155556	movie	The Accompanist	The Accompanist	0	2018	\N	93	Drama,Fantasy
-tt8155650	tvEpisode	Golden Boy	Golden Boy	0	1951	\N	\N	\N
-tt8155750	tvEpisode	Episode dated 19 May 2017	Episode dated 19 May 2017	0	2017	\N	\N	Comedy,Talk-Show
-tt8155850	tvEpisode	Episode #1.25	Episode #1.25	0	1991	\N	\N	\N
-tt8155950	tvEpisode	Episode #2.24	Episode #2.24	0	1992	\N	\N	\N
-tt8156050	tvEpisode	Episode #3.30	Episode #3.30	0	1993	\N	\N	\N
-tt8156150	tvEpisode	Episode dated 16 March 2014	Episode dated 16 March 2014	0	2014	\N	\N	News,Talk-Show
