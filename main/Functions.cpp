@@ -50,7 +50,7 @@ void merge(vector<Movie>& m, int left, int mid, int right){
     int i = 0, j = mid-left+1, k = left;
 
     while(i <= mid-left && j <= right-left){
-        if(aux[i].getTconst() <= aux[j].getTconst())
+        if(aux[i].getPrimaryTitle() <= aux[j].getPrimaryTitle())
             m[k++] = aux[i++];
         else
             m[k++] = aux[j++];
@@ -548,6 +548,8 @@ string toUpperCase(string value){
     return up;
 }
 
+//Busca valores (value) baseados em uma palara chave (key)
+
 vector<Movie> splitStringMovie(const string& input, vector<Movie> m){
     stringstream ss(input);
     string token;
@@ -594,7 +596,7 @@ void filterApplierCinema(string key, string values, vector<Movie> m, vector<Cine
         c = searchByTicketPrice(c,values);
 }
 
-//
+//Busca valores (value) baseados em uma palara chave (key)
 
 vector<Cinema> splitStringCinema(const string& input, vector<Movie> m, vector<Cinema> c){
     stringstream ss(input);
@@ -648,6 +650,9 @@ void menu(vector <Movie> M, vector <Cinema> C){
                 auto start = chrono::high_resolution_clock::now();
 
                 vector<Movie> newFiltered = splitStringMovie(query, M);
+                
+                mergeSort(newFiltered, 0, newFiltered.size()-1);
+
                 for(int i = 0; i < newFiltered.size(); i++)
                     imprimeMovie(newFiltered[i]);
 
