@@ -632,9 +632,15 @@ void menu(vector <Movie> M, vector <Cinema> C){
     string query;
     do{
         cout << endl;
-        cout << "1. Procurar por filmes." << endl;
-        cout << "2. Procurar por cinemas." << endl << endl;
-        cout << "0. Sair" <<  endl;
+        cout << ".==============MENU==============." << endl;
+        cout << "|================================|" << endl;
+        cout << "|                                |"<< endl;
+        cout << "|   [1] Procurar por filmes.     |" << endl;
+        cout << "|   [2] Procurar por cinemas.    |" << endl;
+        cout << "|   [0] Sair.                    |" <<  endl;
+        cout << "|                                |"<< endl;
+        cout << ".================================." << endl;;
+        cout << endl;
         cout << "Insira a opção: ";
         cin >> opc;
         cout << endl;
@@ -666,7 +672,6 @@ void menu(vector <Movie> M, vector <Cinema> C){
 
                 auto start = chrono::high_resolution_clock::now();
 
-                //vector<Cinema> newFiltered = splitStringCinemav2(query, M, C);
                 vector<Cinema> newFiltered = splitStringCinema(query, M, C);
                 for(int i = 0; i < newFiltered.size(); i++)
                     imprimeCinema(newFiltered[i], M);
