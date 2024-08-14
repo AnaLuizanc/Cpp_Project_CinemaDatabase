@@ -522,13 +522,13 @@ vector<Cinema> searchByTicketPrice(vector<Cinema> C, string value){
 //Aplica filtros em Movies.
 
 void filterApplierMovie(string key, string values, vector<Movie>& m){
-    if(key == "TIPO" || key == "TYPE" || key == "TITLETYPE" || key == "TITLE")
+    if(key == "TIPO" || key == "TYPE" || key == "TITLETYPE" || key == "TITLE" || key == "TITULO")
         m = searchByTitleType(m, values);
     else if(key == "YEAR" || key == "ANO")
-        m = searchByYear(m, values);
+        m = searchByYear(m, values);    
     else if(key == "RANGEYEARS")
         m = searchByRangeYears(m, values);
-    else if(key == "MINUTES" || key == "TIME")
+    else if(key == "MINUTES" || key == "TIME" || key == "DURACAO")
         m = searchByRuntimeMinutes(m, values);
     else if(key == "GENRESAND")
         m = searchByGenresAnd(m, values);
@@ -576,13 +576,13 @@ vector<Movie> splitStringMovie(const string& input, vector<Movie> m){
 //Aplica filtros em Cinema.
 
 void filterApplierCinema(string key, string values, vector<Movie> m, vector<Cinema>& c){
-    if(key == "TIPO" || key == "TYPE" || key == "TITLETYPE" || key == "TITLE")
+    if(key == "TIPO" || key == "TYPE" || key == "TITLETYPE" || key == "TITLE" || key == "TITULO")
         c = searchCinemaByTitleType(c, m, values);
     else if(key == "ANO" || key == "YEAR")
         c = searchCinemaByYearMovie(c, m, values);
     else if(key == "RANGEYEARS")
         c = searchCinemaByRangeYearsMovie(c, m, values);
-    else if(key == "TIME" || key == "MINUTES")
+    else if(key == "TIME" || key == "MINUTES" || key == "DURACAO")
         c = searchCinemaByRuntimeMinutesMovie(c, m, values);
     else if(key == "GENRESAND")
         c = searchCinemaByGenresAndMovie(c, m, values);
@@ -590,7 +590,7 @@ void filterApplierCinema(string key, string values, vector<Movie> m, vector<Cine
         c = searchCinemaByGenresOrMovie(c, m, values);
     else if(key == "DISTANCE" || key == "DISTANCIA")
         c = searchByDistance(c, m, values);
-    else if(key == "PRICE" || key == "PRECO")
+    else if(key == "PRICE" || key == "PRECO" || key == "TICKETPRICE")
         c = searchByTicketPrice(c,values);
 }
 
