@@ -286,11 +286,17 @@ vector<Movie> searchByRangeYears(vector<Movie> M, string value){
     vector<string> values = foo(value);
     int startValue = stoi(values[0]);
     int endValue = stoi(values[1]);
+
     for(int i=1; i < M.size(); i++){
         if(M[i].getEndYear() != "\\N"){
             int startYear = stoi(M[i].getStartYear());
             int endYear = stoi(M[i].getEndYear());
             if(startValue <= startYear && endValue >= endYear)
+                filtered.push_back(M[i]);
+        }
+        else if(M[i].getStartYear() != "\\N"){
+            int startYear = stoi(M[i].getStartYear());
+            if(startYear == startValue || startYear == endValue)
                 filtered.push_back(M[i]);
         }
     }
