@@ -538,23 +538,6 @@ void filterApplierMovie(string key, string values, vector<Movie>& m){
         m = searchByIsAdult(m, values);
 }
 
-//
-
-vector<Cinema> removeRepeated(vector<Cinema> c){
-    vector<string>id;
-    vector<Cinema> noRepeated;
-    for(int i = 0; i < c.size(); i++){
-        bool verifier = false;
-        for(int j = 0; j < id.size(); j++)
-            if(c[i].getCinemaID() == id[j])
-                verifier = true;
-        
-        if(verifier == false)
-            noRepeated.push_back(c[i]);
-    }
-    return noRepeated;
-}
-
 //Tranforma chave de estrada em CAIXA ALTA.
 
 string toUpperCase(string value){
