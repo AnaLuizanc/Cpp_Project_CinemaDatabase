@@ -1,5 +1,0 @@
-Cinema_ID, Nome_do_Cinema, Coordenada_X, Coordenada_Y, Preço_Ingresso, Filmes_Em_Exibição
-cc00001, Cineplex Estrela, 347865, 478921, 12.50, tt8000001, tt8000023, tt8000056
-cc00004, MegaFlix Cinemas, 654321, 123456, 13.00, tt8000345, tt8000456, tt8000589, tt8000654
-cc00010, SilverScreen Cinema, 321098, 987654, 11.25, tt8001789, tt8001876
-cc00011, Liberty Theater, 456789, 543210, 10.75, tt8001901, tt8001987
