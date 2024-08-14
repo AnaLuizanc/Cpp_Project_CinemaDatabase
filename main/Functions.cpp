@@ -162,7 +162,8 @@ void imprimeMovie(Movie a){
         cout << a.getOriginalTitle() << " | ";
     if(a.getIsAdult() != "0")
         cout << "AdultTitle | ";
-    cout << a.getStartYear() << " | ";
+    if(a.getStartYear() != "\\N")
+        cout << a.getStartYear() << " | ";
     if(a.getEndYear() != "\\N")
         cout << a.getEndYear() << " | ";
     if(a.getRuntimeMinutes() != "\\N")
@@ -531,9 +532,8 @@ void filterApplierMovie(string key, string values, vector<Movie>& m){
         m = searchByRuntimeMinutes(m, values);
     else if(key == "GENRESAND")
         m = searchByGenresAnd(m, values);
-    else if(key == "GENRESOR"){
+    else if(key == "GENRESOR")
         m = searchByGenresOr(m, values);
-    }
     else if(key == "ADULT" || key == "ADULTO")
         m = searchByIsAdult(m, values);
 }
@@ -659,7 +659,7 @@ void menu(vector <Movie> M, vector <Cinema> C){
         switch(opc){
             case 1:
             {
-                cout << "Insira a query: ";
+                cout << "Insira a busca: ";
                 cin >> query;
 
                 auto start = chrono::high_resolution_clock::now();
@@ -678,7 +678,7 @@ void menu(vector <Movie> M, vector <Cinema> C){
             }
             case 2:
             {
-                cout << "Insira a query: ";
+                cout << "Insira a busca: ";
                 cin >> query;
 
                 auto start = chrono::high_resolution_clock::now();
